@@ -8,6 +8,7 @@
         }
     ],
     "require": {
-        "timber/timber": "^1.18"
+        "timber/timber": "^1.19",
+        "twig/cache-extra": "^3.3"
     }
 }
