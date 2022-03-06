@@ -1,0 +1,105 @@
+<div class="arkde-modal is-large" id="mentorships-course-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <div class="modal-card-body">
+        <div class="columns is-multiline is-centered is-hidden-mobile">
+            <div class="column is-four-fifths has-text-centered">
+                <p class="subtitle is-size-4 is-marginless-bottom" style="margin-bottom:5px">¿Cómo te gustaría aprender?</p>
+                <p class="is-small">Si compras solo el acceso al curso, puedes adquirir las mentorias después también.</p>
+            </div>
+        </div>
+        <div class="columns is-multiline is-centered">
+            <div class="column is-7">
+                <div class="box special">
+                    <p class="subtitle has-text-weight-bold is-size-4 is-gold" style="margin-bottom: 15px">Curso + mentorías en vivo</p>
+
+                    <div class="price is-small" style="padding-bottom:5px;">
+                        {% if mentorship_is_on_sale %}
+                            <p class="is-marginless is-grey is-size-7">Antes: <span class="before">${{wc_mentorship_regular_price|number_format(0,',','.')}}</span></p>  
+                            <div class="with-dt-label">
+                                <p class="is-marginless"><span>${{wc_mentorship_price|number_format(0,',','.')}}</span><small class="currency"> {{currency}}</small></p>
+                                <span class="tag is-danger is-light has-text-weight-bold">{{discount}}% dto hasta {{sale_end|date("j") ~ " de " ~ sale_end|date("M")}}</span>
+                            </div>
+                        {% else %}
+                            <p class="is-marginless"><span class="is-gold">${{(wc_mentorship_price)|number_format(0,',','.')}}</span><small class="currency is-gold">   {{currency}}</small>
+                            </p>
+                        {% endif %}
+                        
+                    </div>
+                    <ul style="padding-top: 2.1rem">
+                        <li><i class="bb-icon-check"></i>Acceso de por vida al contenido</li>
+                        <li><i class="bb-icon-check"></i>Canal del curso en Discord</li>
+                        <li><i class="bb-icon-check"></i>{{post.get_field("bootcamp").weeks}} mentorías semanales en vivo. {{post.get_field("bootcamp").schedule is empty ? 'Horario: TBA' : post.get_field("bootcamp").schedule}}</li>
+                        <li><i class="bb-icon-check"></i>Revisión de avance de proyecto de curso</li>
+                        <li><i class="bb-icon-check"></i>Retroalimentación en vivo de tareas</li>
+                        <li><i class="bb-icon-check"></i>Consejos y tips para entrevistas laborales</li>
+                    </ul>
+                    <br>
+                    <div class="columns is-mobile is-multiline is-vcentered">
+                        <div class="column is-narrow is-paddingless">
+                            <img src="https://static.arkde.co/wp-content/uploads/2020/10/12185035/sergio_lopez-e1605321925178.jpg" class="circle is-marginless" width="50px" height="50px">
+                        </div>
+                        <div class="column">
+                            <p class="is-size-6 is-marginless has-text-weight-bold">Sergio Lopez</p>
+                            <p class="is-size-7 is-marginless">En <strong>Teravision Games</strong> gracias a las mentorías</p>
+                        </div>
+                    </div>
+                    
+                    <div style="padding-top: 2.5rem">
+                        <p style="margin-bottom:10px">Próxima mentorías empiezan: <strong>{{post.get_field("bootcamp").next_start_date is empty ? 'En Espera' : (post.get_field("bootcamp").next_start_date|date("j") ~ " de " ~ post.get_field("bootcamp").next_start_date|date("F"))}}</strong></p>
+                        {% if mentorship_in_cart %}
+                            {% if in_cart %}
+                            <a href="{{site.link}}/checkout/" class="button teal is-medium is-full" title="Matrículate aquí">Matrículate Hoy</a>
+                            {% else %}
+                                {{function('do_shortcode','[add_to_cart id="' ~ wc_product_id ~ '" style="" show_price="FALSE" class="from-learndash-banner is-marginless is-full"]')}}
+                            {% endif %}
+                        {% else %}
+                            {{function('do_shortcode','[add_to_cart id="' ~ wc_mentorship_product_id ~ '" style="" show_price="FALSE" class="from-learndash-banner is-marginless is-full"]')}}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="column is-5">
+                <div class="box">
+                    <p class="subtitle has-text-weight-bold is-size-4" style="margin-bottom: 15px">Solo el curso</p>
+                    <div class="price is-small">
+                        {% if is_on_sale %}
+                            <p class="is-marginless is-grey is-size-7">Antes: <span class="before">${{wc_regular_price|number_format(0,',','.')}}</span></p>  
+                            <div class="with-dt-label">
+                                <p class="is-marginless"><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency"> {{currency}}</small></p>
+                            </div>
+                            
+                            {% if sale_end %}
+                            <p class="sale"><i class="fas fa-stopwatch fa-lg"></i> Hasta el {{sale_end|date("j") ~ " de " ~ sale_end|date("M")}}</p>
+                            {% endif %}
+
+                        {% else %}
+
+                            <p><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency">   {{currency}}</small></p>
+                        {% endif %}
+                    </div>
+                    
+                    <ul style="padding-top: 2.6rem">
+                        <li><i class="bb-icon-check"></i>Acceso de por vida al contenido</li>
+                        <li><i class="bb-icon-check"></i>Canal del curso en Discord</li>
+                        <li><i class="bb-icon-close"></i>Sin mentorías en vivo</li>
+                        <li><i class="bb-icon-close"></i>Sin revisión de proyecto de curso</li>
+                        <li><i class="bb-icon-close"></i>No recibes feedback</li>
+                        <li><i class="bb-icon-close"></i>No recibes ayuda laboral</li>
+                    </ul>
+                    
+                    <div style="padding-top: 2.5rem">
+                        {% if in_cart %}
+                            <a href="{{site.link}}/cart/" class="button is-outline is-medium is-white" title="Matrículate aquí">Compra solo el curso</a>
+                        {% else %}
+                            {{function('do_shortcode','[add_to_cart id="' ~ wc_product_id ~ '" style="" show_price="FALSE" class="from-learndash-banner is-marginless is-outline"]')}}
+                        {% endif %}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <button class="modal-close is-medium close-button" data-modal="mentorships-course-modal" aria-label="close"></button>
+    </div>
+</div>

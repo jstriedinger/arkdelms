@@ -1,0 +1,84 @@
+
+{% set founder =  post.get_field('founder') %}
+<div id="primary" class="content-area bb-grid-cell is-paddingless-bottom">
+<section class="section" id="aboutus">
+	
+	<img src="{{post.thumbnail.src}}" alt="{{post.alt}}" class="banner-img wp-post-image"/>
+	<div class="container">
+		<div class="columns is-centered has-text-centered is-multiline">
+			<div class="column is-two-thirds">
+				<h1 class="title is-size-3 is-large">{{post.title}}</h1>
+				<h2 class="subtitle is-size-5 is-size-4-widesreen has-text-weight-normal">{{post.content|striptags}}</h2>
+				<br>
+			</div>
+			<div class="column is-half">
+				<div class="flex-icons">
+					<a href="https://wwww.facebook.com/arkdel" target="_blank" class="social hoverable">
+						<i class="fab fa-facebook-f fa-2x"></i>
+					</a>
+					<a href="https://wwww.instagram.com/arkdel" target="_blank" class="social hoverable">
+						<i class="fab fa-instagram fa-2x"></i>
+					</a>
+					<a href="https://wwww.instagram.com/arkdel" target="_blank" class="social hoverable">
+						<i class="fab fa-twitter fa-2x"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+<section class="section has-big-padding-top">
+		<div class="columns is-vcentered is-centered is-variable-in-desktop is-10 has-medium-padding-bottom">
+			<div class="column is-one-third has-text-centered">
+				<img src="{{founder.img.url}}" alt="{{founder.img.alt}} " class="is-border-radius" loading="lazy">
+			</div>
+			<div class="column is-two-thirds">
+					<h3 class="subtitle is-size-4 is-gold">José Striedinger, Founder <a href="https://www.linkedin.com/in/jstriedinger/" style="margin-left: 10px;" ><i class="fab fa-linkedin"></i></a></h3>
+					<h2 class="title is-size-2">¿Por qué hacemos esto?</h2><br>
+					<div class="content">
+						{{founder.txt}}
+					</div>
+			</div>
+		</div>
+</section>
+<section class="section">
+	<div class="columns is-variable-in-desktop is-8 is-centered">
+		<div class="column is-two-thirds has-text-centered">
+			<h4 class="subtitle is-size-3">Un poco de nuestra historia</h4>
+			<p>¡En estos años hemos crecido mucho! Parece solo ayer cuando hicimos el primer curso y hoy ya somos una plataforma con estudiantes de diferentes paises de América Latina. Mira un poco mas sobre la historia de ARKDE </p>
+		</div>
+	</div>
+	<div class="columns is-multiline">
+		{% for item in post.get_field("history") %}
+			<div class="column is-half">
+				<a href="{{item.img}}" title="ARKDE quienes somos {{item.header}}">
+					<div class="box history hoverable">
+						<div class="image" style="background-image: url({{item.img}})"></div>
+						<div class="content">
+							<h4 class="subtitle is-5 has-text-weight-bold">{{item.header}}</h4>
+							<p>{{item.txt}}</p>
+							<span class="year">{{item.year}}</span>
+						</div>
+					</div>
+				</a>
+				
+			</div>
+		{% endfor %}
+	</div>
+	<div class="columns has-small-padding-top has-text-centered is-centered">
+		<div class="column is-half">
+			<p>Hemos logrado todo esto con apoyo de los mejores</p>
+		</div>
+		
+	</div>
+	<div class="partners has-tiny-padding-bottom has-big-padding-bottom">
+		{% for partner in post.get_field("partners") %}
+		<div class="partner">
+			<img src="{{ Image(partner) }}" alt="{{partner.alt}} partner Arkde" loading="lazy" />
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+</div>

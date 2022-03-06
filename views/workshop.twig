@@ -1,0 +1,149 @@
+
+<div id="primary" class="content-area bb-grid-cell career is-paddingless-top">
+	<div id="main" class="site-main">
+		<div class="bb-vw-container bb-learndash-banner">
+	 		<img src="{{post.thumbnail.src}}" alt="{{post.title}}" class="banner-img wp-post-image"/>
+		    <div class="bb-course-banner-info container dark">
+				<div class="columns is-multiline is-centered has-text-centered">
+					<div class="column is-two-thirds">
+						 {% set teacher = post.get_field("speaker") %}
+						<span class="tag is-light has-tiny-margin-bottom">Workshop</span>
+						<div class="level has-text-left">
+							<div class="level-item">
+								<div class="teacher-item small">
+									<img src="{{ teacher.thumbnail.src('thumbnail') }}" alt="{{teacher.title}} profesor Arkde" width="60px" height="60px">
+									<div class="content">
+										<p class="is-marginless has-text-weight-bold"> {{teacher.title}}</p>
+										<p class="is-marginless  is-size-7">{{teacher.subtitle_extra}}</p>
+									</div>
+								</div>
+							</div>  
+						</div>
+		            	<h1 class="title is-size-2 is-size-1-widescreen is-large has-tiny-margin-top">{{post.title}}</h1>
+						<h2 class="subtitle is-size-5">{{post.get_field("start_date")|capitalize}} - {{post.start_date_hour}}</h2>
+						<br>
+						{% if in_cart %}
+							<a href="{{site.link}}/checkout" class="button is-medium teal">Inscríbete Hoy</a>
+						{% else %}
+							{{function('do_shortcode','[add_to_cart id="' ~ wc_product_id ~ '" style="margin-bottom: 10px" show_price="FALSE" class="is-medium"]')}}
+						{% endif %}
+					</div>
+				</div>
+		    </div>
+		</div>
+		<div class="bb-grid learndash-wrapper" id="datalayer_course" data-name="{{post.title}}" data-id="{{wc_product_id}}" data-price="{{wc_price}}" data-category="Carrera">
+			<div class="columns has-small-padding-top is-variable-in-desktop is-8">
+				<div class="column">
+					<div class="card bullets last ">
+						<h2 class="subtitle is-size-5  has-text-weight-bold">¿Qué vas a aprender?</h2>
+						<ul>
+						
+							{% for req in post.get_field("what_to_learn") %}
+							<li>
+								<i class="bb-icon-check colored teal"></i>{{req.txt}}
+							</li>
+							{% endfor %}
+							
+						</ul>
+					</div>
+					<div class="content">
+					{{post.content}}
+					</div>
+					<div class="columns is-vcentered is-multiline has-medium-padding-top">
+						<div class="column is-full">
+							<h3 class="subtitle is-size-4 is-size-3-widescreen title-color has-text-weight-bold">Conoce a tu instructor</h2>
+						</div>
+						<div class="column is-full">
+							{% include "cards/teacher.twig" with {"class":"medium simple","single":true,"logos":true }  %}
+						</div>
+					</div>
+					<div class="columns is-multiline">
+						<div class="column">
+							<div class="card bullets">
+								<h2 class="subtitle is-size-5 has-text-weight-bold">¿Qué necesitas?</h2>
+								<p>{{post.requirements}}</p>
+							</div>
+						</div>
+						<div class="column">
+							<div class="card bullets">
+								<h2 class="subtitle is-size-5 has-text-weight-bold">¿Quién puede tomar este taller?</h2>
+								<p>{{post.audience}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="column is-one-third is-hidden-touch bb-single-course-sidebar">
+					<div class="box bb-course-preview-content colored gradient " id="sticky_sidebar">
+						<div class="price"  id="pricing">
+                            {#function('do_shortcode','[wcj_country_select_drop_down_list]')#}
+                            {% if is_on_sale %}
+                                <p class="is-marginless">Antes: <span class="before">${{wc_regular_price|number_format(0,',','.')}}</span></p>  
+                                <div class="with-dt-label">
+                                    <p class="current"><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency"> {{currency}}</small></p>
+                                    <span class="tag is-danger is-light has-text-weight-bold">{{discount}}% dto.</span>
+                                </div>
+                                {% if sale_end %}
+                                   <p class="is-size-7 is-marginless">Promo hasta el {{sale_end|date("j") ~ " de " ~ sale_end|date("F")}}</p>
+                                {% endif %}                                
+
+                            {% else %}
+                                <p class="current"><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency">   {{currency}}</small></p>
+                            {% endif %}
+                            
+                        </div>
+						{% if in_cart %}
+							<a href="{{site.link}}/checkout" class="button is-medium is-full teal">Inscríbete Hoy</a>
+							<br>
+						{% else %}
+							{{function('do_shortcode','[add_to_cart id="' ~ wc_product_id ~ '" style="margin-bottom: 10px" show_price="FALSE" class="is-full"]')}}
+						{% endif %}
+						<br>
+						<div class="bb-course-volume">
+							<ul class="bb-course-volume-list">
+									<li>
+										<i class="bb-icons bb-icon-radio"></i>{{post.get_field("bootcamp").weeks}} Clase online en vivo
+									</li>
+									<li>
+										<i class="bb-icons bb-icon-calendar"></i>{{post.get_field("start_date")|date("j") ~ " de " ~ post.get_field("start_date")|date("F")}}
+									</li>
+									<li>
+										<i class="bb-icons bb-icon-clock"></i>{{post.duration}} 						
+									</li>
+									<li>
+										<i class="bb-icons bb-icon-feather"></i>Proyecto para presentar
+									</li>
+									{% set nivel = post.terms("level")[0].slug  %}
+									{% if nivel is not empty %}
+										<li>
+											<span class="courselevel">
+												
+												{% if nivel == "basico" %}
+													<div class="bar filled"></div>
+													<div class="bar"></div>
+													<div class="bar"></div>
+												{% elseif nivel == "intermedio" %}
+													<div class="bar filled"></div>
+													<div class="bar filled"></div>
+													<div class="bar"></div>
+												{% else %}
+													<div class="bar filled"></div>
+													<div class="bar filled"></div>
+													<div class="bar filled"></div>
+												{% endif %}
+											</span>
+											<span style="margin-left: 0.8rem;vertical-align:text-top">Nivel: <strong>{{nivel}}</strong></span>
+										</li>
+									{% endif %}
+									
+								
+							</ul>
+						</div>
+							
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>

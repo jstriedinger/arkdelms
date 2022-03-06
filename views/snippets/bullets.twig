@@ -1,0 +1,22 @@
+<section class="section is-paddingless-top has-medium-padding-bottom bullets">
+	
+	{% for bullet in post.get_field("bullets") %}
+		{% set reverse = loop.index % 2 == 0  %}
+		<div class="columns is-variable-in-desktop is-10 is-vcentered has-big-padding-top only-mobile {{reverse ? 'reverse' : ''}}">
+			<div class="column is-half">
+				<h4 class="subtitle is-size-3">{{bullet.header}}</h4>
+				<p class="has-small-margin-bottom">{{bullet.txt}}</p>
+				{% if "discord" in bullet.cta.link %}
+				<a href="{{bullet.cta.link}}" class="button teal"><span>{{bullet.cta.txt}}</span><span class="icon"><i class="fab fa-discord"></i></span></a>
+				{% else %}
+					<a href="{{bullet.cta.link}}" class="button teal">{{bullet.cta.txt}} </a>
+				{% endif %}
+				
+			</div>
+			<div class="column is-half is-hidden-mobile">
+				<img src="{{bullet.image.url}}" alt="educacion arkde" loading="lazy" >
+			</div>
+		</div>
+	{% endfor %}
+	
+</section>

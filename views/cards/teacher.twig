@@ -1,0 +1,51 @@
+<article class="card teacher {{class}}">
+	{% set multiple_clients = teacher.get_field("clients") and teacher.get_field("clients")|length > 1 %}
+	{% if "background" in class %}
+		<img src="{{teacher.get_field('bgimg').url}}" alt="{{teacher.get_field('bgimg').alt}}" class="banner-img" loading="lazy">
+	{% endif %}
+	<div class="card-header">
+		<img src="{{ teacher.thumbnail.src }}" alt="{{teacher.title}} profesor Arkde" title="{{teacher.title}}">
+		<div class="description">
+			<p class="is-marginless is-size-5 {{single ? 'is-size-4-desktop' : ''}} title title-color">{{teacher.title}}</p>
+			<p class="is-marginless is-size-7 {{single ? 'is-size-6-desktop' : ''}}">{{teacher.subtitle}}</h6>
+			<div class="social-links">
+			{% for site in teacher.get_field("sites") %}
+				<a href="{{site.url}}" rel="nofollow" class="with-icon">
+					<i class="icon">
+						<span class="fab fa-{{site.type}} fa-lg"></span>
+					</i>
+				</a>
+			{% endfor %}</div>
+		</div>
+		{% if multiple_clients == false and logos %}
+			<div class="company">
+				<img src='{{teacher.get_field("clients")[0]["url"]}}' alt='{{teacher.get_field("clients")[0]["alt"]}}' loading="lazy" title="{{teacher.get_field("clients")[0]["title"]}}">
+			</div>
+		{% endif %}
+	</div>
+
+	<div class="card-content">
+		<div class="content is-small has-text-justify">
+			{{teacher.meta("desc")}}
+		</div>
+		{% if multiple_clients and logos %}
+			<div class="clients has-small-padding-top">
+				<p class="has-text-weight-bold  subtitle title-color" style="padding-right: 10px;">Ha trabajado con: </p>
+				{% for client in teacher.get_field("clients") %}
+					<img src='{{client.url}}' alt="{{client.alt}}" loading="lazy" title="{{client.title}}">
+				{% endfor %}
+			</div>
+		{% endif %}
+		{% if teacher.get_field("work") %}
+			<p class="has-text-weight-bold has-small-padding-top subtitle title-color">Galeria del instructor:</p>
+			<div class="project-gallery">
+				{% for work in teacher.get_field("work") %}
+					<a href="{{work.url}}" class="hoverable">
+						<div class="item with-size" style="background-image: url({{work.sizes.medium}})"></div>
+					</a>
+				{% endfor %}
+			</div>
+		{% endif %}
+			
+	</div>
+</article>

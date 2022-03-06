@@ -1,0 +1,286 @@
+/*
+* Everything to do with Bulma framework overrides or added styles
+*/
+
+
+.icon {
+	&.is-huge {
+		height: 4.5rem;
+		width: 4.5rem;
+	}
+}
+
+//Used to create horizontal star lists
+.icons-list {
+	font-size: 0;
+	line-height: 0;
+	&.gold {
+		[class^="bb-icon-"], [class*=" bb-icon-"] {
+			color: $gold;
+			font-size: 18px;
+			 &:not(:last-of-type)
+			 {
+			 	margin-right: 10px;
+			 }
+		}
+		&.is-small {
+			[class^="bb-icon-"], [class*=" bb-icon-"] {
+				font-size: 15px;
+				&:not(:last-of-type)
+				{
+					margin-right: 5px;
+				}
+			}
+		}
+		margin-bottom: 10px;
+	}
+}
+
+//Bulma Modals
+.arkde-modal{
+	//transition: opacity 0.2s ease;
+	will-change: opacity;
+	opacity: 0;
+	display: flex;
+	z-index: 	-99;
+	.modal-card{
+		max-width: 95%;
+	}
+	&.is-active{
+		z-index: 99;
+	}
+	&.is-small{
+		.modal-card{
+			max-width: 550px;
+		}
+		
+	}
+	&.is-tiny{
+		.modal-card{
+			max-width: 450px;
+		}
+		
+	}
+	&.is-large {
+		@include tablet {
+			.modal-card{
+				width: 95%;
+				max-width: 950px;
+			}
+
+		}
+		@include widescreen {
+			.modal-card{
+				max-width: 1024;
+			}
+
+		}
+
+	}
+	&#mentorships-course-modal, &#mentorships-career-modal {
+		.modal-card-body {
+			background: $careerbg;
+			> .columns > .column .box {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				
+				> div:last-of-type {
+					margin-top: auto;
+				}
+				.columns {
+					margin: 0;
+				}
+
+			}
+			.column .box {
+				padding: 1.2rem;
+				background-color: transparent;
+				&.special {
+					border: 2px solid $gold;
+					border-radius:$radius;
+				}
+				p:first-of-type {
+					line-height: 1.1;
+					small {
+						font-size: 60% !important;
+					}
+				}
+			}
+		}
+		p:not(.grey), span:not(.tag):not(.before), .title, .subtitle, ul li, strong {
+			color: white;
+		}
+		.before{
+			color: $grey-light;
+		}
+		.price {
+			font-weight: 400;
+		}
+		ul {
+			list-style: none;
+			margin: 0;
+			li {
+				display: flex;
+				flex-direction: row;
+				align-items: flex-start;
+				font-size: 14px;
+				line-height: 1.5;
+				&:not(:last-child)
+				{
+					margin-bottom: 14px;
+				}
+				[class^="bb-icon-"] {
+					font-size: 20px;
+					margin-right: 5px;
+				}
+			}
+			margin-bottom: 1.2em;
+		}
+		
+		
+	}
+	.modal-card{ 
+		.modal-card-body{
+			border-radius: $radius;
+			padding: 2rem;
+			label
+			{
+				small{
+					font-size: 70%;
+					font-weight: 400;
+				}
+			}
+
+
+		}
+		overflow: visible;
+	}
+	.modal-content{ 
+		overflow: visible;
+		&.has-video{
+			h3.title, h3.subtitle{
+				color: white !important;
+			}
+			@include mobile{
+				position: relative;
+				padding-bottom: 56.25%;
+				padding-top: 30px; height: 0;
+
+				iframe,	object,	embed {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+				}
+				h3.subtitle{
+					padding-top: 14rem;
+				}
+			}
+		}
+	}
+	.modal-close{ 
+		background: $black-ter;
+		position: absolute;
+		box-shadow: 0 10px 40px 0 rgba(white,0.1), 0 2px 9px 0 rgba(white,0.06);
+		right: -16px;
+		top: -16px;
+		padding: 0;
+		&:hover{
+			background: $grey-darker;
+		}
+		&.is-white{
+			background: $white-ter;
+			&:before,&:after{
+				background-color: $black-ter;
+			}
+			&:hover{
+				background: white;
+			}
+		}
+	}
+
+	&#premium-course-modal {
+		.modal-card-body {
+			background-image: linear-gradient(to bottom right,$purple1, $purple2);
+			background-size: 400% 400%;
+	    	animation: MovingGradient 4s ease infinite;
+			z-index: 0;
+			h1,h2,h3,h4,h5,h6,p {
+				color: white;
+			}
+			.premium-logo {
+				display: inline-block;
+			}
+			img {
+				display: inline-block;
+				max-width: 100px;
+				margin-right: 0.5rem;
+				@include desktop {
+					max-width: 150px;
+				}
+			}
+		}
+	}
+	&#next-event-modal {
+		.modal-card-body {
+			padding: 0;
+			position: relative;
+			img {
+				width: 100%;
+				z-index: 0;
+			}
+			.cta {
+				padding: 1rem;
+				background: $purple1;
+				text-align: center;
+				h5,h4 { color: white;  }
+				.buttons {
+					justify-content: center;
+					a.button {
+						flex: 1;
+						@include desktop {
+							margin-bottom: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.message {
+	//override for budyboss message styles
+	&.bulma {
+		padding: 0
+	}
+	.content {
+		margin-bottom: 0;
+	}
+	@include tablet {
+		.flex-container {
+			display: flex;
+			align-items: center;
+			.content {
+				margin-right: 2rem;;
+			}
+			.icon {
+				margin-left: auto;
+			}
+		}
+
+	}
+	&.is-info {
+		h1,h2,h3,h4,h5 {
+			color: #1d72aa;
+		}
+	}
+}
+
+
+//Becuase of some buddyboss we need to do this
+.field.has-addons .control:last-child:not(:only-child) .button, .field.has-addons .control:last-child:not(:only-child) .input, .field.has-addons .control:last-child:not(:only-child) .select select {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}

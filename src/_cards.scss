@@ -1,0 +1,1000 @@
+.card {
+
+	
+    background-color: white;
+    position: relative;
+	.card-background {
+		//a background image for the whole card
+		position: absolute;
+		top: 0;
+		left:0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		z-index: 0;
+		background-size: cover;
+		background-position: top center;
+		&:after {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width:100%;
+			height: 100%;
+			content: " ";
+			z-index: 1;
+			background: linear-gradient(to bottom,rgba($black,0.2) 30%, rgba($black,0.8) 70%);
+		}
+	}
+	&.is-transparent {
+		background: transparent;
+		box-shadow: none !important;
+		border: none;
+	}
+
+    &.career {
+    	
+    	&.vertical {
+	    	flex-direction: column;
+	    	padding: 1em;
+	    	.card-header {
+	    		position: relative;
+	    		border-radius: $radius;
+	    		overflow: hidden;
+	    		display: flex;
+	    		flex-direction: row;
+	    		padding: 1em;
+	    		align-items: center;
+	    		&:before {
+					content: "";
+					position: absolute;
+					right:0;
+					left:0;
+					top: 0;
+					height: 100%;
+					background-image: linear-gradient(to bottom right,$purple1, $purple2);
+					background-size: 400% 400%;
+			    	animation: MovingGradient 3s ease infinite;
+					z-index: 0;
+				}
+				.title, .subtitle, img { 
+					color: white;
+					z-index: 1;
+					margin: 0;
+					small {
+						font-size: 14px;
+						line-height: 1;
+					}
+				}
+	    		img {
+	    			padding-right: 1em;
+	    			max-height: 50px;
+	    			width: auto;
+	    			border-radius: 0;
+	    		}
+	    		margin-bottom: 2rem;
+
+
+	    	}
+	    	.card-content
+	    	{
+	    		font-size: 0;
+	    		.course-bullet{
+	    			
+	    			.separator {
+	    				position: absolute;
+					    background-color: $navcolor;
+					    width: 2px;
+					    height: 99%;
+					    left: 34px;
+					    bottom: 0;
+					    z-index: -1;
+	    			}
+	    			&:last-child {
+	    				.separator {display: none;}
+	    			}
+	    			
+	    		}
+	    	}
+	    	.card-footer{
+	    		margin-top: 1rem;
+	    	}
+    	}
+    	
+		.title, .subtitle, p  {
+			color: white;
+		}
+    }
+	&.mini-career, &.bullets {
+		
+		padding: $card-content-padding;
+		margin: 1em 0;
+		
+	}
+	&.mini-career {
+		padding: 1rem;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		background-image: linear-gradient(to bottom right,$purple1, $purple2);
+		z-index: 0;
+		.course-bullet {
+    		position: relative;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			padding: 25px 15px;
+			padding-top:0;
+			z-index: 2;
+			
+			img {
+				margin-right: 10px; 
+				border-radius: 100%;
+				background: lighten($purple1,15%);
+				border: 2px solid $navcolor;
+			}
+			p{ 
+				font-size: 14px; 
+				line-height: 1.4;
+				color: $txtcolor;
+			}
+    		&.special {
+				img {
+					border-color: $gold !important;
+				}
+			}
+    	}
+		.career-list-horizontal
+		{
+			display: none;
+			font-size: 0;
+			
+			flex-direction: row;
+			flex-wrap: nowrap;
+			align-items: flex-start;
+			max-width: 300px;
+			padding: 0 1.5rem;
+			flex: 1;
+			.course-bullet{
+				padding: 0;
+				flex-direction: column;
+				
+				.separator {
+					position: absolute;
+					background-color: $navcolor;
+					width: 99%;
+					height: 2px;
+					top: 18px;
+					z-index: -1;
+					&.right {
+						right: 0;
+						width: 55%;
+					}
+					&.left {
+						left: 0;
+						width: 55%;
+					}
+				}
+				&:last-child {
+					.separator.right {display: none;}
+				}
+				&:first-child {
+					padding-left: 0;
+					.separator.left {display: none;}
+				}
+				&:nth-child(2)
+				{
+					flex:1;
+				}
+				
+			}
+		}
+			
+		@include widescreen {
+			.career-list-horizontal {
+				display: flex;
+			}
+		}
+		.card-header {
+			.title, .subtitle, img { 
+				color: white;
+				z-index: 1;
+				margin: 0;
+				small {
+					font-size: 13px;
+					line-height: 1;
+				}
+			}
+			img {
+				padding-right: 1em;
+				max-height: 43px;
+				width: auto;
+				border-radius: 0;
+			}
+		}
+	}
+    &.bullets, &.simple {
+		box-shadow: none !important;
+		background: $arkdegrey;
+    	//border: 1px solid $grey-lighter;
+    	&.last {
+    		margin-bottom: 3rem;
+    	}
+    	
+
+    	ul {
+    		list-style: none;
+    		display: flex;
+    		flex-direction: column;
+    		margin: 0;
+    		li {
+    			[class^="bb-icon-"], [class*=" bb-icon-"] {
+    				padding-right: 5px;
+    				font-size: 19px;
+    			}
+    			display: flex;
+    			flex-direction: row;
+    			padding: 5px;
+    			font-size: 14px;
+    			line-height: 1.5;
+    		}
+    		@include tablet {
+    			flex-direction: row;
+    			flex-wrap: wrap;
+    			li {
+    				flex: 0 0 50%;
+    				
+
+    			}
+    		}
+    	}
+    }
+    &.is-small {
+    	padding: 1em;
+    }
+   
+    &.career.banner {
+
+    	
+		&:before {
+			content: "";
+			position: absolute;
+			right:0;
+			left:0;
+			top: 0;
+			height: 100%;
+			background-image: linear-gradient(to bottom right, rgba(darken($purple1,20%),0.7), rgba($purple2,0.7));
+			background-size: 400% 400%;
+	    	animation: MovingGradient 5s ease infinite;
+			z-index: 0;
+		}
+		img.bg{
+    		position: absolute;
+    		top: 0;
+    		right: 0;
+    		left: 0;
+    		margin: 0 auto;
+    		min-height: 100%;
+    		width: 100%;
+    		object-fit: cover;
+    		z-index: -1;
+    	}
+    	
+    	.tags {
+    		margin-bottom: 0;
+    	}
+	    		
+		.card-content{
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			z-index: 2;
+			img{
+				max-width: 120px;
+				height: auto;
+				@include desktop {
+					max-width: 150px;
+				}
+			}
+			p {
+				color: white;
+				margin-bottom: 0;
+				@include desktop {
+					font-size: 18px;
+				}
+			}
+			.desc {
+				padding-left: 1em;
+				p.header{
+					font-size: 26px;
+					font-weight: 900;
+					margin: 0;
+					font-family: "Harmonia Sans","Open Sans";
+					line-height: 1;
+					margin-top: 0.5rem;
+					@include desktop {
+						font-size: 32px;
+					}
+					@include widescreen {
+						font-size: 36px;
+					}
+					@include fullhd {
+						font-size: 42px;
+					}
+				}
+			}
+			.tag {
+    			background: #ffc95b !important;
+    			color: darken(#ffc95b,50%) !important;
+    		}
+		}
+	}
+	&.premium {
+		&:before {
+			content: "";
+			position: absolute;
+			right:0;
+			left:0;
+			top: 0;
+			height: 100%;
+			background-image: linear-gradient(to bottom right,$purple1, $purple2);
+			background-size: 400% 400%;
+	    	animation: MovingGradient 4s ease infinite;
+			z-index: 0;
+		}
+		.card-content {
+			padding: 1.4em;
+    		position: relative;
+			h1,h2,h3,h4,h5, ul li {
+				color: white;
+			}
+			.premium-logo {
+				display: inline-block;
+				margin-bottom: 1em;
+				font-size: 12px;
+				height: 30px;
+				padding-top: 0px;
+				margin-bottom: 3px;
+				padding-right: 5px;
+			}
+		}
+		padding: 0;
+		ul {
+			margin: 0;
+			margin-top: 1.5em;
+			list-style: none;
+			display: flex;
+			flex-wrap: wrap;
+			li {
+				flex: 50%;
+				display: flex;
+				align-items: center;
+				font-size: 14px;
+				color: $txtcolor;
+				> i {
+					margin-right: 0.5em;
+				}
+				margin-bottom: 5px;
+			}
+		}
+	}
+
+
+    &.teacher {
+    	padding: 1.8em;
+    	padding-right: 2.5em;
+    	z-index: 1;
+    	@include cardness();
+    	
+    	@include tablet {
+    		height: 100%;
+    	}
+    	&.background, &.colored {
+    		p,h3,h5,h6,a {
+    			color: white !important;
+    		}
+    		.icon {
+    			color: $gold !important;
+    		}
+    		
+    	}
+    	&.background {
+    		&:before {
+    			content: "";
+    			position: absolute;
+    			right:0;
+    			left:0;
+    			top: 0;
+    			height: 100%;
+    			background: rgba(darken($purple2,30%), 0.7);
+    			z-index: -1;
+    		}
+    	}
+    	&.colored {
+    		background: $navcolor;
+    	}
+    	
+    	.banner-img {
+    		z-index: -2;
+    	}
+    	.card-content {
+    		padding: 0;
+    		padding-top: 2.5em;
+    	}
+    	.card-header {
+    		
+    		> img{
+	    		width: 70px;
+	    		height: auto;
+	    		@include desktop {
+	    			width: 90px;
+	    		}
+	    	}
+
+    	}
+    	.company {
+			display: none;
+			@include desktop {
+				display: inherit;
+			}
+    		margin-left: auto;
+    		img {
+    			max-width:120px;
+    			max-height: 90px;
+    		}
+    	}
+    	.clients {
+    		display: flex;
+    		flex-wrap: nowrap;
+    		align-items: center;
+    		img {
+    			max-height: 60px;
+    			max-width: 100px;
+    			height: auto;
+    			
+
+    		}
+    		> * 
+    		{
+    			margin: 0 0.6rem;
+    			&:first-of-type {
+    				margin-left: 0;
+    			}
+    		}
+    	}
+    	&.medium {
+    		@include desktop {
+	    		padding-right: 3.5em;
+	    		padding-left: 2em;
+	    		.card-header {
+	    			> img {
+		    				width: 120px;
+		    		}
+		    		.description {
+		    			padding-left: 2em;
+		    		}
+	    		}
+
+    		}
+    	}
+    }
+
+    .card-header {
+    	display: flex;
+    	flex-direction: row;
+    	align-items: center;
+    	> img {
+    		width: 100px;
+    		height: 100px;
+    		border-radius: 100%;
+    		@include mobile {
+    			width: 70px;
+    			height: auto;
+    		}
+    	}
+    	.description {
+    		padding-left: 1em;
+    		.social-links {
+    			padding-top: 10px;
+    			.icon:not:first-of-type {
+    				padding-left: 5px;
+    			}
+				a {
+					color: $gold;
+				}
+    		}
+    	}
+    	
+    	h6 {
+    		color: #728188;
+    	}
+    }
+    .card-content {
+    	position: relative;
+    }
+
+    &.course {
+    	position: relative;
+    	display: flex;
+    	flex-direction: column;
+    	justify-content: stretch;
+    	padding: 0;
+    	border: none;
+    	&.max {
+    		height: 100%;
+    	}
+    	.card-info {
+    		height: 100%;
+    	}
+    	&.with-progress {
+    		flex-direction: column !important;
+    		.card-info {
+    			display: flex;
+		    	flex-direction: column;
+		    	justify-content: stretch;
+    		}
+    	}
+    	.card-content {
+    		p {
+    			color: #122B46;
+    		}
+    		ul {
+    			margin: 0;
+    			margin-top: auto;
+    			list-style: none;
+    			padding-top: 2rem;
+    			li {
+    				display: flex;
+    				align-items: center;
+    				font-size: 14px;
+    				color: $grey-light;
+    				line-height: 1;
+    				> i {
+    					margin-right: 0.5em;
+    				}
+    				&:not(:last-of-type)
+    				{
+    					margin-bottom: 1em;
+    				}
+    			}
+    		}
+    	}
+		.bb-course-category .logos {
+			filter: grayscale(1);
+		}
+
+    	&.career-horizontal {
+    		background: linear-gradient(to right bottom, $purple1, $purple2 );;
+    		p {
+    			color: white;
+    			font-size: 14px;
+    		}
+    		.card-content {
+    			.subtitle { color: white; }
+
+    		}
+    		ul {
+    			li {
+    				color: $grey-lighter;
+    			}
+    		}
+			@include desktop {
+				&.full-height {
+					height: 100%
+				}
+			}
+    	}
+
+    	//for leanrdash
+    	.course-progress-wrap {
+    		padding: 1em 1.5em;
+    		margin-bottom: 0;
+    		border-top: 1px solid #e5e5e5;
+    	}
+    	
+    	
+    	
+    	.extra-details {
+    		display: flex;
+    		flex-direction: row;
+    		justify-content: flex-start;
+    		padding-top: 1.8em;
+    		align-items: flex-end;
+    		> span { 
+    			font-size: 13px;
+    			padding-left: 0;
+    			[class^="bb-icon-"], [class*=" bb-icon-"] {
+    				font-size: 16px;
+    				margin-right: 5px;
+    			}
+    			&:not(:last-of-type) {
+    				padding-right: 1rem;
+    			}
+    			&:last-of-type {
+    				margin-left: auto;
+    				margin-bottom: 5px;
+    			}
+    		}
+    		span.price-card {
+    			.before {
+    				text-decoration: line-through;
+    			}
+    			.actual {
+    				font-weight: bold;
+    				color: $gold;
+    				font-size: 22px
+    			}
+    		}
+    	}
+    	.card-content {
+	    	padding: 1.2em;
+	    	display: flex;
+	    	flex-direction: column;
+	    	height: 100%;
+	    	align-items: flex-start;
+	    	flex: 1;
+	    }
+	    .card-header {
+	    	position: relative;
+	    	padding-top: 50%;
+	    	overflow: hidden;
+	    	display: block;
+	    	img{
+	    		position: absolute;
+	    		top: 0;
+	    		right: 0;
+	    		left: 0;
+	    		margin: 0 auto;
+	    		min-height: 100%;
+	    		width: 100%;
+	    		object-fit: cover;
+	    		border-radius: 0;
+	    	}
+	    }
+
+		.bb-course-category {
+    		position: absolute;
+    		bottom: 1em;
+    		right: 1em;
+    		display: flex;
+    		flex: 0;
+    		align-items: baseline;
+			span.logos:not(:last-of-type)
+			{
+				margin-right: 5px;
+			}
+		}
+
+	    //Horizontal from tablet-desktop
+	    @include desktop {
+    		flex-direction: row;
+    		.card-header {
+	    		flex: 0;
+	    		padding: 0;
+	    		flex-basis: 40%;
+
+    		}
+    		&.with-progress .card-info {
+    			flex-direction: row;
+    		}
+    	}
+
+
+    }
+    &.new-course {
+    	position: relative;
+    	display: flex;
+    	flex-direction: column;
+    	padding: 0;
+    	border: none;
+
+    	
+    	.card-header {
+    		position: relative;
+    		padding-top: 50%;
+	    	overflow: hidden;
+	    	display: block;
+    		img{
+	    		position: absolute;
+	    		top: 0;
+	    		right: 0;
+	    		left: 0;
+	    		margin: 0 auto;
+	    		min-height: 100%;
+	    		width: 100%;
+	    		object-fit: cover;
+	    		border-radius: 0;
+	    	}
+
+    	}
+
+    	
+
+    	.card-content {
+    		flex:1;
+    		padding: 1.2em;
+    		position: relative;
+    		display: flex;
+    		flex-direction: column;
+    		align-items: flex-start;
+
+    		p {
+    			color: #122B47;
+    		}
+    		ul {
+    			margin: 0;
+    			margin-top: auto;
+    			list-style: none;
+    			li {
+    				display: flex;
+    				align-items: center;
+    				font-size: 14px;
+    				color: $grey-light;
+    				line-height: 1;
+    				> i {
+    					margin-right: 0.5em;
+    				}
+    				&:not(:last-of-type)
+    				{
+    					margin-bottom: 1em;
+    				}
+    			}
+    		}
+    	}
+    	
+    	
+    	span.price-card {
+    		position: absolute;
+    		bottom: 0.8em;
+    		right: 1.2em;
+    		display: flex;
+    		flex: 0;
+    		align-items: baseline;
+			.before {
+				text-decoration: line-through;
+				color: $grey-lighter;
+				margin-right: 5px;
+			}
+			.actual {
+				font-weight: bold;
+				color: $gold;
+				font-size: 22px
+			}
+		}
+    }
+
+	&.colored {
+        background: $navcolor;
+		.title, .subtitle, p, strong {
+			color: white;
+		}
+	}
+    &.testimonial 
+    {
+		&.horizontal {
+			padding: $card-content-padding;
+			.card-header, .card-content {
+				padding: 0;
+			}
+			&:not(.special) .card-content {
+				padding-top: 1rem;
+			}
+			flex-direction: column;
+			.card-header {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				img {
+					border-radius: 100%;
+					max-width: 70px;
+					max-height: 70px;
+				}
+				.right-content {
+					padding-left: 1em;
+				}
+			}
+			
+			&.white {
+				p,h4,h6 { color: white; }
+				border-color: rgba(255,255,255,0.2);
+			}
+			.stars {
+				.bb-icons {
+					color: $gold !important;
+				}
+			}
+			.flag-icon-background {
+				top: 0;
+				left: -10px;
+				right: unset;
+			}
+		}
+		
+        &.horizontal.special .card-content {
+			img {
+				max-width: 65px;
+			}
+            @include desktop {
+                flex-direction: row;
+                .image {
+                    flex-basis: 125px;
+                }
+                img {
+                    max-width: none;
+                }
+				.inner-content {
+					padding: 0.5rem 0 0.5rem 1rem;
+				}
+            }
+			.mobile-content {
+				padding-left: 1rem;
+				align-self: center;
+			}
+        }
+        .card-content{
+            position: relative;
+            display: flex;
+            position: relative;
+            flex-direction: column;
+        
+            img {
+                border-radius: 100%;
+                max-width: 90px;
+                
+            }
+            
+            .image {
+                padding: 0.5rem;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+        
+            }
+            .inner-content {
+                flex: 1;
+                padding: 1rem 0;
+				padding-bottom: 0;
+			
+                p {
+                    font-size: 15px;
+                }
+            }
+        
+        }
+		&.vertical 
+		{
+			background-color: white;
+			overflow: visible;
+			margin-top:3rem;
+			padding-top:1.5rem;
+			text-align: center;
+			
+			img {
+				border-radius: 100%;
+				max-width: 75px;
+				max-height: 75px;
+				position: absolute;
+				top: -60px;
+				right: calc(50% - 35px);
+
+			}
+
+			h4 {
+			}
+			p {
+				font-size: 14px;
+			}
+
+		}
+    }
+
+	&.blog-item {
+		.card-content {
+			.subtitle, p, .entry-content, .content {
+				color: white;
+			}
+			.entry-content {
+				margin-bottom: 0;;
+			}
+			.entry-header {
+				margin-bottom: 5px;
+			}
+		}
+		.card-content {
+			padding-top: 10rem;
+			@include desktop {
+				padding-top: 12rem;
+			}
+			
+		}
+	}
+	
+}
+.box, .card {
+	color: $txtcolor;
+	&.hoverable {
+    	will-change: top, transform;
+    	transition: top 0.2s ease-out, transform 0.2s ease-out,box-shadow 0.2s ease-in-out;
+    	top: 0;
+    	&:hover, &:focus {
+    		top: -7px;
+    		box-shadow: $card-box-shadow-normal;
+    	}
+    }
+}
+
+.box {
+	&.colored {
+		background: $navcolor;
+		.title, .subtitle, p, strong {
+			color: white;
+		}
+		ul > li {
+			color: white;
+			[class^="bb-icon-"], [class*="bb-icon-"], i {
+				color: white;
+			}
+		}
+		li .courselevel {
+			.bar{
+				background-color: $grey;
+				&.filled {
+					background-color: white !important;
+				}
+			}
+		}
+		
+
+		&.gradient {
+			background-image: linear-gradient(to bottom right,$purple1, $purple2);
+			//background-size: 400% 400%;
+			//animation: MovingGradient 3s ease infinite;
+		}
+
+	}
+	&.history {
+		background: $navcolor;
+		display: flex;
+		position: relative;
+		overflow: hidden;
+		flex-direction: column;
+		
+		.image {
+			flex: 0;
+			padding: 0.5rem;
+			flex-basis: 200px;
+			background-size: cover;
+			background-position: center center;
+			border-radius: $radius-small;
+			width: 100%;
+		}
+		@include mobile {
+			.image {
+				flex-basis: 150px;
+			}
+		}
+		.content {
+			padding: 1rem 0.5rem;
+			padding-bottom: 0;
+			flex: 1;
+			.subtitle {color: white}
+			p {
+				font-size: 13px;
+			}
+			span.year {
+				float: right;
+				font-weight: bold;
+				font-size: 20px;
+				color: $turquoise;
+			}
+		}
+		@include tablet {
+			flex-direction: row;
+			.content {
+				padding: 0.5rem 1rem
+			}
+		}
+
+	}
+		
+}

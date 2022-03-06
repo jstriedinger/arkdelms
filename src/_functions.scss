@@ -1,0 +1,86 @@
+
+@mixin customGap($val: 1.6)
+{
+	@include tablet {
+		$columngap: $val + rem;
+		> .column {
+		    padding: $val + rem;
+		}
+
+		
+		
+	}
+}
+@mixin cardness {
+	box-shadow: $card-box-shadow-normal;
+    border-radius: $radius;
+}
+
+//Spacing variables
+@each $p_size in $padding_sizes {
+	$sizeKey: nth($p_size, 1);
+	$sizeValue: nth($p_size, 2);
+	@each $pos in $padding_positions{
+		.has-#{$sizeKey}-margin-#{$pos}{
+
+			margin-#{$pos}: #{$sizeValue*0.5}rem;
+			&.in-mobile{
+				margin-#{$pos}: #{$sizeValue}rem;
+			}					
+			&:not(.in-mobile){
+				@include desktop{
+					margin-#{$pos}: #{$sizeValue}rem;
+				}
+			}
+			&.only-mobile
+			{
+				@include desktop{
+					margin-#{$pos}: initial;
+				}
+			}
+			&.from-tablet{
+				margin-#{$pos}: initial;
+				@include tablet{
+					margin-#{$pos}: #{$sizeValue}rem;
+				}
+			}
+			@if $pos == "bottom"{
+				&.not-on-last-child{
+					&:last-child{
+						margin-bottom: inherit;
+					}
+				}
+			}
+		}
+		.has-#{$sizeKey}-padding-#{$pos}{
+			padding-#{$pos}: #{$sizeValue*0.5}rem;
+			@if $sizeKey == "medium" or $sizeKey == "small"{
+				&.section{
+					padding-#{$pos}: #{$sizeValue}rem;
+				}
+			}
+			@include desktop{
+				padding-#{$pos}: #{$sizeValue}rem;
+			}
+			&.only-mobile
+			{
+				@include desktop{
+					padding-#{$pos}: initial;
+				}
+			}
+			&.from-tablet{
+				padding-#{$pos}: initial;
+				@include tablet{
+					padding-#{$pos}: #{$sizeValue}rem;
+				}
+			}
+			@if $pos == "bottom"{
+				&.not-on-last-child{
+					&:last-child{
+						padding-bottom: inherit;
+					}
+				}
+			}
+		}
+	}
+}

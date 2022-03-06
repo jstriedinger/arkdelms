@@ -1,0 +1,48 @@
+//ARKDE
+$padding_sizes: (
+	('tiny',0.8),
+    ('small', 2),
+    ('medium', 4),
+    ('big', 7),
+    ('huge', 10),
+);
+$padding_positions: (
+    'top','bottom'
+);
+
+
+$card-box-shadow-normal: 0 5px 20px 0 rgba(62,57,107,0.1), 0 0 0 transparent;
+$purple1: #6a11cb;
+$purple2: #4A00E0;
+
+$navcolor: darken(#5802b6,16%);
+$careerbg: darken($navcolor,6%);
+$buycolor: #22a6b3;
+$bodycolor: #fcfcfc;
+$link: #007CFF;
+$txtcolor: #4D5C6D;
+$title-color: #122B46;
+$subtitle-color: $txtcolor;
+
+
+//BULMA css
+$radius-small: 5px;
+$radius: 8px;
+$radius-large: 10px;
+$tag-radius: 3px;
+$family-primary: "Harmonia Sans", 'Open Sans', Arial, Sans-serif;
+$family-secondary: 'Open Sans', Arial, sans-serif;
+$body-family: $family-secondary !important;
+$gold: #ffab08;//Replacing with our gold color
+$button-border-width: 0;
+$section-padding: 3rem 1rem;
+$footer-background-color: $navcolor;
+$card-color: inherit;
+$card-header-shadow: none;
+$card-footer-border-top: none;
+
+//$modal-background-background-color: rgba(black,0.5);
+
+//Bulma card
+$card-radius: $radius;
+$card-background-color: white;

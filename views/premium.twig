@@ -1,0 +1,159 @@
+
+<div id="primary" class="content-area bb-grid-cell is-paddingless-bottom">
+<section class="section has-medium-padding-top" id="premium">
+	<img src="{{post.thumbnail.src}}" alt="{{post.title}}"
+             class="banner-img wp-post-image"/>
+	{% if post.vimeo_id  %}
+     <iframe id="videobg" data-src="https://player.vimeo.com/video/{{post.vimeo_id}}?background=1&autoplay=1&loop=1&byline=0&title=0"  data-img="{{post.thumbnail.src}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+    {% endif %}
+	<div class="container has-medium-padding-top has-medium-padding-bottom ">
+		<div class="columns is-vcentered">
+			<div class="column is-four-fifths is-two-thirds-fullhd">
+				<h1 class="is-big">{{post.title}}</h1>
+				<br>
+				<div class="premium-plans">
+					<div class="yearly">
+						<p class="is-size-3 is-marginless is-gold is-primary">Plan Anual</p>
+
+						<p class="is-size-3 is-gold is-marginless">{{(yearly.get_price / 12)|round}}<small>USD/mes*</small></p>
+
+						<p class="is-size-7 is-gold">*Cobro anual de ${{yearly.get_price}} USD</p>
+						{% if yearly_in_cart == false %}
+							<a href="?add-to-cart={{yearly.get_ID()}}" class="button is-full is-square is-medium teal" rel="nofollow">Únete ahora</a>
+						{% else %}
+							<a href="{{function('wc_get_checkout_url')}}" class="button is-full is-medium is-square teal" rel="nofollow">Únete ahora</a>
+						{% endif %}
+
+					</div>
+					<div class="semester">
+						<p class="is-size-3 is-marginless is-primary">Plan Semestral</p>
+
+						<p class="is-size-3 is-marginless">{{(semester.get_price / 6)|round}}<small>USD/mes*</small></p>
+
+						<p class="is-size-7">*Cobro cada 6 meses de ${{semester.get_price}} USD</p>
+						{% if semester_in_cart == false %}
+							<a href="?add-to-cart={{semester.get_ID()}}" class="button is-full is-square is-medium is-white is-outline" rel="nofollow">Únete ahora</a>
+						{% else %}
+							<a href="{{function('wc_get_checkout_url')}}" class="button is-full is-medium is-square is-outline is-white" rel="nofollow">Únete ahora</a>
+						{% endif %}
+
+					</div>
+				</div>
+				<br> <br>
+				<p class="is-size-6">Termina en empresas como:</p>
+				<div class="partners is-left regular is-small">
+					{% for partner in post.get_field("partners") %}
+						<img src="{{ Image(partner) }}" alt="{{partner.alt}} partner Arkde" loading="lazy" />
+					{% endfor %}
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section">
+	<div class="columns is-variable-in-desktop is-10 is-vcentered  has-big-padding-top">
+		<div class="column is-half is-three-fifths-widescreen">
+			<h2 class="is-medium">{{post.get_field('bullets').programming_title}}</h2>
+			<p>{{post.get_field('bullets').programmin_txt}}</p>
+			
+			{% for p_course in post.get_field("premium_courses") %}
+				<div class="media-item course">
+					<div class="profile">
+						{% for teacher in p_course.get_field("teachers") %}
+							<img src="{{teacher.thumbnail.src('tiny')}}" alt="{{teacher.title}} instructor desarrollo videojuegos y arte digital en arkde" width="50px" height="50px">
+						{% endfor %}
+					</div>
+					<div class="content">
+						<p ><strong>{{p_course.title}}</strong><br><small>Con 
+							{% for teacher in p_course.get_field("teachers") %}
+							{{teacher.title}}{% if loop.last == false %},{% endif %}
+							{% endfor %}
+						</small></p>
+					</div>	
+					<div class="right">
+						<p>
+							<i class="bb-icons bb-icon-video is-medium" style="margin-right: 1rem;"></i>{{ p_course.get_field("duration").hours ~'h ' ~ p_course.get_field("duration").mins ~'m' }}
+						</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="column is-half is-two-fifths-widescreen">
+			<img src="{{post.get_field('bullets').programming}}" alt="educacion arkde" loading="lazy" >
+		</div>
+	</div>
+	<div class="columns is-variable-in-desktop is-8 is-vcentered reverse has-big-padding-top">
+		<div class="column is-half is-three-fifths-widescreen">
+			<h2 class="is-medium">{{post.get_field('bullets').mentoring_title}}</h2>
+			<p>{{post.get_field('bullets').mentoring_txt}}</p>
+			<div class="schedules">
+			{% for horario in schedules %}
+					{% for schedule in horario.get_field("schedule") %}
+						{% include "snippets/mentor-schedule.twig" %}
+					{% endfor %}
+			{% endfor %}
+			</div>
+			<p><small>*Hora colombiana (GMT - 5)</small></p>
+		</div>
+		<div class="column is-half is-two-fifths-widescreen">
+			<img src="{{post.get_field('bullets').mentoring}}" alt="educacion arkde" loading="lazy" >
+		</div>
+	</div>
+</section>
+<section class="section">
+	<div class="columns is-centered is-vcentered is-multiline is-variable-in-desktop is-10">
+		{% for bullet in post.get_field("bullet_points") %}
+		<div class="column is-half">
+			<div class="media-item {{bullet.special ? 'special' : ''}}">
+				<div class="image">
+					<i class="{{bullet.icon}} fa-3x"></i>
+				</div>
+				<div class="content">
+					<h4>{{bullet.header}}</h4>
+					<p>{{bullet.desc}}</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="columns is-multiline is centered has-big-padding-top">
+		<div class="column is-full has-text-centered">
+			<h2>Conoce a tus mentores</h2>
+		</div>
+		{% for teacher in post.get_field('mentors') %}
+			<div class="column">
+				{% include "cards/teacher.twig" with {"class":"colored"} %}
+			</div>
+		{% endfor %}
+	</div>
+</section>
+
+<section class="section full-width colored purple has-big-margin-top has-big-margin-bottom">
+	{% if post.get_field("success_story") is not empty %}
+		<div class="container">
+			<div class="columns is-multiline is-centered">
+				<div class="column is-full has-text-centered">
+					<h2>Accelera tu carrera como programador</h2>
+				</div>
+				{% for story in post.get_field("success_story") %}
+				<div class="column is-half">
+					<div class="big-testimonial multiple with-bg">
+						<img src="{{story.get_field('bg_img')}}" alt="testimonio arkde premium videojuegos" class="background">
+						<div class="image">
+							<img src="{{story.thumbnail}}" alt="{{story.title}} estudiante Arkde" loading="lazy" width="120px" height="120px">
+						</div>
+						<div class="content">
+							<p>{{story.txt}}</p>
+							<h3 class="with-subtitle subtitle">{{story.title}}</h3>
+							<h5>Ahora es {{story.get_field("job").position}} en <strong>{{story.get_field("job").company}}</strong></h5>
+
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		
+	{% endif %}
+</section>

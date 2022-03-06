@@ -1,0 +1,29 @@
+<section class="learndash-wrapper">
+	<h3 class="title has-text-centered is-size-3 has-big-padding-top">Preguntas Frecuentes</h3>
+	<div class="ld-item-list double-items">
+		<div class="ld-item-list-items" data-ld-expand-list="true">
+			{% for faq in post.get_field("faq") %}
+			<div class="ld-item-list-item ld-expandable purple ld-item-lesson-item" id="faq-{{loop.index}}">
+			    <div class="ld-item-list-item-preview">
+			        
+			        <div class="ld-item-details">
+						<div class="ld-expand-button ld-button-alternate" data-ld-expands="faq-{{loop.index}}">
+							<span class="ld-icon-arrow-down ld-icon"></span>
+							<div class="ld-item-name " >
+								{{faq.question}} <!--/.ld-item-title-->
+							</div>
+						</div> 
+					</div>
+			    </div> <!--/.ld-item-list-item-preview-->
+				<div class="ld-item-list-item-expanded">
+					<div class="ld-table-list ld-topic-list ld-no-pagination" id="faq-{{loop.index}}">
+						{{faq.answer}}
+					</div> 
+
+		        </div> 
+		    </div> 
+			{% endfor %}
+
+	 	</div> 
+    </div>
+</section>

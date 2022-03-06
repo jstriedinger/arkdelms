@@ -1,0 +1,18 @@
+<div class="columns has-medium-padding-top is-multiline">
+	<div class="column is-full">
+		<h5 class="subtitle is-size-4 has-text-weight-bold is-marginless">Proyectos de estudiantes</h5>
+	</div>
+	<div class="columns is-full">
+		<div class="project-gallery students">
+			{% for project in post.get_field("student_projects") %}
+
+			<a href="{{project.url}}" title="ARKDE - proyecto de {{project.caption}}">
+				<img src="{{project.sizes.medium_large}}" alt="{{project.alt}}" loading="lazy">
+				<div class="content">
+					{{project.caption}}
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+</div>

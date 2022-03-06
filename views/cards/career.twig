@@ -1,0 +1,34 @@
+<a title="{{career.title}}" href="{{career.link}}" class="has-card item-click" data-name="{{career.title}}" data-id="{{career_id}}" data-price="{{career_price}}" data-category="Carrera">
+	<div class="card course hoverable career-horizontal">
+		<div class="card-header">
+			<img src="{{career.thumbnail.src}}" alt="{{career.title}} ARKDE" loading="lazy">
+		</div>
+		<div class="card-content">
+            <div class="career-icon is-small">
+                <img src="{{career.get_field('icon')}}" alt="Carrera {{career.title}} curso online" width="40px" >
+                <span>Carrera</span>
+                {% set reg_price =  function('get_post_meta',career.wc_product,'_regular_price',true)%}
+                {% set sale_price =  function('get_post_meta',career.wc_product,'_sale_price',true)%}
+                {% if sale_price and sale_price < reg_price  and hide_price == false%}
+                <span class="tag is-light is-danger has-text-weight-bold" >
+                    {{ (100 - ((sale_price * 100) / reg_price))|round(0, 'ceil')}}% Dto.
+                </span>
+                {% endif %}
+            </div>
+			<p class="subtitle is-size-4 is has-text-weight-bold is-marginless">{{career.title}}</p>
+            <p style="margin-top: 5px">Creado con:<img src="{{career.get_field('partner').url}}" alt="{{post.get_field('partner').title}}" loading="lazy" width="60px" style="margin-left: 8px"></p>
+            <br>
+			<ul>
+            	<li>
+                    <i class="bb-icons bb-icon-book"></i>{{career.get_field("courses")|length }} Cursos Online
+                </li>
+                {% if  career.duration %}
+                <li>
+                    <i class="bb-icons bb-icon-video"></i>{{ career.duration}}
+                </li>
+                {% endif %}
+                
+            </ul>
+		</div>
+	</div>
+</a>

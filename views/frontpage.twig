@@ -1,0 +1,115 @@
+{% set featured =  post.get_field("featured_courses") %}
+
+<section class="section" id="home">
+	
+	<img src="{{post.thumbnail.src}}" alt="{{post.alt}}" class="banner-img wp-post-image ken-burn"/>
+	<div class="container">
+		<div class="columns">
+			<div class="column is-four-fifths">
+				<h1 class="title is-size-2 is-large">{{post.title}}</h1>
+				<br>
+				<div class="buttons">
+					{% for btn in post.get_field("cta") %}
+					<a href="{{btn.btn_url.url}}" class="button is-large">{{btn.btn_url.title}}</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+<section class="section">
+	<div class="columns is-centered">
+		<div class="column is-full has-text-centered">
+			<p class="is-marginless">Instructores e invitados de las mejores empresas</p>
+		</div>
+	</div>
+	<div class="partners has-small-padding-bottom">
+		{% for partner in post.get_field("partners") %}
+		<div class="partner">
+			<img src="{{ Image(partner) }}" alt="{{partner.alt}} partner Arkde" loading="lazy" />
+		</div>
+		{% endfor %}
+		<br>
+	</div>
+	<div class="columns is-multiline has-big-padding-top">
+		<div class="column is-two-thirds">
+			<h3 class="title is-size-3 is-size-2-widescreen">Empieza a aprender</h3>
+		</div>
+		{% for feature_course in featured %}
+			<div class="column is-half card-max">
+				{% if feature_course.post_type == "career"%}
+				{% include "cards/career.twig" with {'career':feature_course} %}
+				{% else %}
+				{% include "cards/course-item.twig" with {'course':feature_course} %}
+				{% endif %}
+				
+			</div>
+		{% endfor %}
+		
+	</div>
+</section>
+<section class="section">
+	<div class="columns is-centered is-multiline has-big-padding-top">
+	<div class="column is-full">
+		<h3 class="title is-size-3 is-size-2-widescreen">Educación online que funciona</h3>
+	</div>
+	{% for story in post.get_field("testimonials") %}
+		<div class="column is-half">
+			<div class="card testimonial horizontal special colored dark">
+				<div class="card-content">
+					<div class="image">
+						<img src="{{story.thumbnail('medium')}}" alt="{{story.title}} estudiante Arkde" loading="lazy" width="100px" height="100px">
+						<div class="is-hidden-desktop mobile-content">
+							<div class="icons-list gold">
+								<i class="bb-icon-star-fill"></i>
+								<i class="bb-icon-star-fill"></i>
+								<i class="bb-icon-star-fill"></i>
+								<i class="bb-icon-star-fill"></i>
+								<i class="bb-icon-star-fill"></i>
+							</div>
+							<h3 class="title is-size-6 is-marginless">{{story.title}}</h3>
+						</div>
+					</div>
+					<div class="inner-content content">
+						<div class="icons-list gold is-hidden-touch">
+							<i class="bb-icon-star-fill"></i>
+							<i class="bb-icon-star-fill"></i>
+							<i class="bb-icon-star-fill"></i>
+							<i class="bb-icon-star-fill"></i>
+							<i class="bb-icon-star-fill"></i>
+						</div>
+						<p class="has-text-weight-light">{{story.txt}}</p>
+						<h3 class="title is-size-5 is-marginless is-hidden-touch has-tiny-margin-top">{{story.title}}</h3>
+						<p class="is-marginless has-text-weight-light is-hidden-touch">Ahora es {{story.get_field("job").position}} en <strong>{{story.get_field("job").company}}</strong></p>
+	
+					</div>
+
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+		
+	
+</section>
+
+{% include "snippets/bullets.twig" %}
+<div class="columns has-small-padding-bottom is-centered">
+	<div class="column is-half has-text-centered">
+		<p class="subtitle is-size-3">Sigamos en contacto</p>
+		<div class="flex-icons">
+			<a href="https://wwww.facebook.com/arkdel" target="_blank" class="social hoverable">
+				<i class="fab fa-facebook-f fa-2x"></i>
+			</a>
+
+			<a href="https://wwww.instagram.com/arkdel" target="_blank" class="social hoverable">
+				<i class="fab fa-instagram fa-2x"></i>
+			</a>
+			<a href="https://wwww.instagram.com/arkdel" target="_blank" class="social hoverable">
+				<i class="fab fa-twitter fa-2x"></i>
+			</a>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,17 @@
+<div class="requirements">
+	<h3 class="subtitle is-size-5 title-color has-text-weight-bold">¿Qué necesitas?</h3>
+	<ul>
+		{% for req in post.get_field("info").requirements %}
+		<li>
+			{{req.item}}
+		</li>
+		{% endfor %}
+		
+	</ul>
+</div>
+<div class="has-small-padding-top has-small-margin-bottom">
+	<h3 class="subtitle is-size-5 title-color has-text-weight-bold has-tiny-margin-bottom">¿Para quién es este curso?</h3>
+	<p>{{post.get_field("info").for_who}}</p>
+	<br>
+</div>
+

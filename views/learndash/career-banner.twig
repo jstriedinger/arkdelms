@@ -1,0 +1,22 @@
+{% set career = post.get_field("career") %}
+{% if post.get_field("career") is not empty %}
+<h4 class="sale green"><i class="icon is-medium"> <span class="fas fa-percentage"></span></i> Espera! Puedes ahorrar {{career_discount}}% con la Carrera!</h4>
+<a href="{{career.link}}" class="has-card">
+<div class="card career banner hoverable">
+	<img src="{{career.thumbnail.src}}" alt="" class="bg">
+	<div class="card-content">
+        	<img src="{{theme.link}}/dist/img/career_icon.png" alt="Carrera arkde">
+        	<div class="desc">
+        		<div class="tags">
+	        		<span class="tag">CARRERA</span>
+	        		<span class="tag">{{career_courses|length}} Cursos</span>
+        		</div>
+        		<p class="header">{{career.title}}</p>
+        		<p>Este y {{career_courses|length - 1}} cursos más!</p>
+        		<button class="button is-outline small is-square has-tiny-margin-top is-hidden-tablet">Clic aquí</button>
+        	</div>
+	</div>
+</div>
+</a>
+<br><br><br><br>
+{% endif %}

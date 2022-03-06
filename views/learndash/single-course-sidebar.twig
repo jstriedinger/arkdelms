@@ -1,0 +1,254 @@
+<div class="bb-single-course-sidebar bb-preview-wrap ">
+
+    <div class="bb-ld-sticky-sidebar">
+        <div class="widget bb-enroll-widget arkde">
+            <div class="bb-enroll-widget flex-1 push-right">
+                <div class="bb-course-preview-wrap bb-thumbnail-preview">
+                    <div class="bb-preview-course-link-wrap">
+                    {% if course_video_embed %}
+                        <a href="#" class="modal-opener" data-modal="course-preview-modal" id="preview_trailer">
+                            <div class="thumbnail-container {{thumb_mode}}">
+                                <div class="preview-overlay">
+                                    <i class="bb-icon-play-circle-fill is-huge bb-icons"></i>
+                                    <span>Mira el trailer</span>
+                                </div>
+                                {#<div class="bb-course-video-overlay">
+                                   
+                                </div>#}
+                                {{function("the_post_thumbnail")}}
+                                
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="thumbnail-container {{thumb_mode}}">
+                            <div class="bb-course-video-overlay">
+                                <div>
+                                    <span class="bb-course-play-btn-wrapper"><span
+                                                class="bb-course-play-btn"></span></span>
+                                    <div>Mira el trailer</div>
+                                </div>
+                            </div>
+                            {{function("the_post_thumbnail")}}
+                            
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="bb-course-preview-content">
+                <div class="bb-button-wrap">
+                {% if post.delivery_type == "selfpaced_bootcamp" and post.get_field("bootcamp").mentorships_open_sale %}
+                    {% if is_enrolled == false %}
+                        <div class="price"  id="pricing">
+                            
+                            {% if is_on_sale %}
+                                <p class="is-marginless">Desde: <span class="before">${{wc_regular_price|number_format(0,',','.')}}</span></p>  
+                                <div class="with-dt-label">
+                                    <p class="current"><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency"> {{currency}}</small></p>
+                                    <span class="tag is-danger is-light has-text-weight-bold">{{mentorship_is_on_sale ? 'Hasta ' : ''}}{{discount}}% dto.</span>
+                                </div>                                
+                            {% else %}
+                                <span>Desde</span>
+                                <p class="current"><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency">   {{currency}}</small></p>
+                            {% endif %}
+                        </div>
+
+
+                        {% if post.open_sale %}
+                            <a href="" class="modal-opener button teal is-fullwidth is-medium" data-modal="mentorships-course-modal">Mira tus opciones aquí</a>
+                        {% else %}
+                            <span class="tag is-warning is-medium is-full"><span class="bb-icons bb-icon-alert-triangle" style="margin-right:5px;"></span>NO está abierto a ventas</span>
+                        {% endif %}
+                    {% else %}
+                        {#<div class="price"  id="pricing">
+                            <span>Agrega {{post.get_field("bootcamp").weeks}} semanas de mentoría</span>
+                            {% if mentorship_is_on_sale %}
+                                <p class="is-marginless">Antes: <span class="before">${{wc_mentorship_regular_price|number_format(0,',','.')}}</span></p>  
+                                <div class="with-dt-label">
+                                    <p class="current"><span>${{wc_mentorship_price|number_format(0,',','.')}}</span><small class="currency"> {{currency}}</small></p>
+                                    <span class="tag is-danger is-light has-text-weight-bold">Hasta {{discount}}% dto.</span>
+                                </div>
+                                {% if sale_end %}
+                                    <p class="is-size-7 has-text-danger is-marginless">Promo hasta el {{sale_end|date("j") ~ " de " ~ sale_end|date("F")}}</p>
+                                {% endif %} 
+                            {% else %}
+                                <p class="current"><span>${{wc_mentorship_price|number_format(0,',','.')}}</span><small class="currency">   {{currency}}</small></p>
+                            {% endif %}
+                        </div>#}
+                        <a href="{{resume_link}}"
+                                   class="button teal is-full" >Sigue el curso<i class="bb-icons bb-icon-arrow-right"></i></a>
+                    {% endif %}
+
+                {% else %}
+                   	{% if ( is_enrolled == false ) %}
+                        <div class="price"  id="pricing">
+                            {#function('do_shortcode','[wcj_country_select_drop_down_list]')#}
+                            {% if is_on_sale %}
+                                <p class="is-marginless">Antes: <span class="before">${{wc_regular_price|number_format(0,',','.')}}</span></p>  
+                                <div class="with-dt-label">
+                                    <p class="current"><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency"> {{currency}}</small></p>
+                                    <span class="tag is-danger is-light has-text-weight-bold">{{discount}}% dto.</span>
+                                </div>
+                                {% if sale_end %}
+                                   <p class="is-size-7 has-text-danger is-marginless">Promo hasta el {{sale_end|date("j") ~ " de " ~ sale_end|date("F")}}</p>
+                                {% endif %}                                
+
+                            {% else %}
+                                <p class="current"><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency">   {{currency}}</small></p>
+                            {% endif %}
+                            
+                        </div>
+    		            {% if course_price_type == 'free' %} 
+    		            	<div class="learndash_join_button <?php echo $btn_advance_class; ?>">
+    	                        <form method="post">
+    	                            <input type="hidden" value="{{post.id}}" name="course_id"/>
+    	                            <input type="hidden" name="course_join"
+    	                                   value="<?php echo wp_create_nonce( 'course_join_' . get_current_user_id() . '_' . $course_id ); ?>"/>
+    	                            <input type="submit" value="<?php echo $button_text; ?>" class="btn-join"
+    	                                   id="btn-join"/>
+    	                        </form>
+                            </div>
+
+                        {% elseif post.open_sale %}
+                            {% if post.delivery_type == "bootcamp" and "now"|date('Y-m-d') > post.get_field("bootcamp").next_start_date|date('Y-m-d') %}
+                                <span class="tag is-warning is-medium is-full"><span class="bb-icons bb-icon-alert-triangle" style="margin-right:5px;"></span>NO está abierto a ventas</span>
+                            {% else %}
+                                {% if in_cart == false%}
+                                {# lets check if it should show the Premiu popup #}
+                                        {{function('do_shortcode','[add_to_cart id="' ~ wc_product_id ~ '" style="" show_price="FALSE" class="from-learndash-banner is-marginless"]')}}
+                                {% else %}
+                                {% if post.delivery_type == "bootcamp" %}
+                                    <a href="{{site.link}}/checkout/" class="added_to_cart  button teal is-medium is-full" title="Matrículate aquí">Matrículate aquí</a>
+                                {% else %}
+                                    <a href="{{site.link}}/checkout/" class="added_to_cart  button teal is-medium is-full" title="Matrículate aquí">Termina tu compra</a>
+                                {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            <span class="tag is-warning is-medium is-full"><span class="bb-icons bb-icon-alert-triangle" style="margin-right:5px;"></span>NO está abierto a ventas</span>
+                        {% endif %}
+                    {% else %}
+                        <a href="{{resume_link}}"
+                               class="button teal is-full">Sigue el curso <i class="bb-icons bb-icon-arrow-right"></i></a>
+
+                    {% endif %}
+                {% endif %}
+            	</div>
+            	{% if lessons|length > 0 %}
+            		<div class="bb-course-volume">
+                    <ul class="bb-course-volume-list">
+                        {% if post.get_field("delivery_type") == "bootcamp" %}
+                            <li>
+                                <i class="bb-icons bb-icon-calendar"></i>Empieza el {{post.get_field("bootcamp").next_start_date is empty ? 'TBA' : (post.get_field("bootcamp").next_start_date|date("j") ~ " de " ~ post.get_field("bootcamp").next_start_date|date("F"))}}
+                            </li>
+                            <li>
+                                <i class="bb-icons bb-icon-video"></i>{{post.get_field("bootcamp").weeks}} mentorías en vivo
+                            </li>
+                            <li>
+                                <i class="bb-icons bb-icon-clock"></i>{{post.get_field("bootcamp").schedule is empty ? 'Horario: TBA' : ('Horario: ' ~ post.get_field("bootcamp").schedule)}}
+                            </li>
+                        {% endif %}
+                            <li>
+                                <i class="fas fa-infinity" style="font-size: 15px"></i> Acceso de por vida al contenido
+                            </li>
+                        {% if post.get_field("delivery_type") == "selfpaced_bootcamp" and post.get_field("bootcamp").mentorships_open_sale %}
+                            <li>
+                                <i class="bb-icons bb-icon-video"></i>Mentorías en vivo opcionales ($ extra)
+                            </li>
+                                
+                        {% endif %}
+                        {% if post.get_field("delivery_type") == "selfpaced" %}
+                            <li>
+                                <i class="bb-icons bb-icon-smile"></i>Online a tu ritmo
+                            </li>
+                        {% endif %}
+                        {% if has_certificate %}
+                            <li>
+                                <i class="bb-icons bb-icon-badge"></i>Certificado oficial
+                            </li>
+                        {% endif %}
+                        {% if topics > 0 %}
+                            <li>
+                                <i class="bb-icons bb-icon-bookmark"></i>{{topics}} lecciones
+                            </li>
+                            <li>
+                                <i class="bb-icons bb-icon-play-circle"></i>{{ post.get_field("duration").hours ~'h' ~ post.get_field("duration").mins ~'m' }} de video
+                            </li>
+                        {% endif %}
+                        {% if post.get_field("info").resources > 0 %}
+                            <li>
+                                <i class="bb-icons bb-icon-generic"></i> {{post.get_field("info").resources}}+ recursos descargables
+                            </li>
+                        {% endif %}
+                        {% if post.get_field("info").discord %}
+                        <li>
+                            <i class="fab fa-discord" style="font-size: 15px"></i>Chat en Discord
+                        </li>
+                        {% endif %}
+                        {% if post.get_field("delivery_type") == "bootcamp" %}
+                            <li>
+                                <i class="bb-icons bb-icon-feather"></i>Proyecto final para portafolio
+                            </li>
+                        {% endif %}
+                            
+                        {% if course_members > 25 %}
+                            <li>
+                                <i class="bb-icons bb-icon-members"></i>{{course_members}}+ Estudiantes
+                            </li>
+                        {% endif %}
+                        {% set nivel = post.terms("level")[0].slug  %}
+                        {% if nivel is not empty %}
+                            <li>
+                                <span class="courselevel">
+                                    
+                                    {% if nivel == "basico" %}
+                                         <div class="bar filled"></div>
+                                         <div class="bar"></div>
+                                         <div class="bar"></div>
+                                    {% elseif nivel == "intermedio" %}
+                                        <div class="bar filled"></div>
+                                         <div class="bar filled"></div>
+                                         <div class="bar"></div>
+                                    {% else %}
+                                        <div class="bar filled"></div>
+                                         <div class="bar filled"></div>
+                                         <div class="bar filled"></div>
+                                    {% endif %}
+                                </span>
+                                <span style="margin-left: 0.8rem;vertical-align:text-top">Nivel: <strong>{{nivel}}</strong></span>
+                            </li>
+                        {% endif %}
+                        
+                        {% if course_cats %}
+                            <li>
+                                <i class="bb-icons bb-icon-tools"></i><div class="bb-course-category">
+                                {% for cat in course_cats %} 
+                                    {% if cat.slug != "programacion" and cat.slug != "arte-3d" %}
+                                    <span class="logos {{cat.slug}}" data-balloon-pos="up" data-balloon="{{cat.name}}"></span>
+                                    {% endif %}
+                                {% endfor %}
+                                    
+                                </div>
+                            </li>
+                        {% endif %}
+                        
+                        
+                        
+                    </ul>
+                    
+                    </div>
+            	{% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% if course_video_embed %}
+<div class="arkde-modal is-large" id="course-preview-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+            {{video_html_embed}}
+        <button class="modal-close is-large close-button is-white" data-modal="course-preview-modal" aria-label="close"></button>
+    </div>
+</div>
+{% endif %}

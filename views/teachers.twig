@@ -1,0 +1,37 @@
+
+<div id="primary" class="content-area bb-grid-cell is-paddingless-bottom">
+<section class="section  colored">
+	<div class="container">
+		<div class="columns is-centered">
+			<div class="column is-two-thirds has-text-centered">
+				<h1 class="is-big">Conoce a los mentores</h1>
+				{{post.content}}
+			</div>
+			
+		</div>
+	</div>
+	<div class="wave bottom">
+	        {% include 'svg/wave.svg' %}
+	    </div>
+						
+</section>
+<section class="section">
+	<div class="columns is-multiline is-variable-in-desktop is-8">
+		{% for teacher in posts %}
+			<div class="column is-half is-one-third-fullhd">
+				{% include "cards/teacher.twig" with {"class":"background"} %}
+			</div>
+		{% endfor %}
+	</div>
+</section>
+<section class="section has-huge-padding-bottom">
+	<hr>
+	<div class="columns is-centered has-text-centered">
+		<div class="column is-half is-one-third-widescreen">
+			<h3 >Empieza a aprender HOY mismo</h3>
+			<a href="{{site.link}}/cursos" class="button large is-full">Mira todos los cursos</a>
+		</div>
+	</div>
+</section>
+
+</div>

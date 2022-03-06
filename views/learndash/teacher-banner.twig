@@ -1,0 +1,22 @@
+{% set teachers = post.get_field("teachers") %}
+<div class="columns is-vcentered is-multiline has-big-padding-top">
+	<div class="column is-full">
+        <h2 class="subtitle is-size-4 is-size-3-widescreen title-color has-text-weight-bold">{{ teachers|length > 1 ? "Conoce a tus instructores" : "Conoce a tu instructor"}}</h2>
+	</div>
+	<div class="column">
+		<div class="columns is-multiline">
+			{% for teacher in teachers %}
+                {% if loop.index == 1  and loop.last %}
+				<div class="column is-full">
+					{% include "cards/teacher.twig" with {"class":"medium", "bootcamp": (post.delivery_type == 'bootcamp' ? true : false),"single":true,"logos":true }  %}
+				</div>
+                {% else %}
+                    <div class="column is-full is-half-widescreen">
+                        {% include "cards/teacher.twig"   %}
+                    </div>
+                {% endif %}
+			{% endfor %}
+		</div>
+		
+	</div>
+</div>

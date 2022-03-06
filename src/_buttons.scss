@@ -1,0 +1,117 @@
+
+a.button,button.button, input.button {
+
+	//default action button is gold
+	background-color: $gold;
+	&:hover, &:focus, &:active {
+		color: white;
+	}
+	.icon:last-child:not(:first-child){ margin-right: 0; }
+	.bb-icons {
+		font-size: 20px;
+		margin-left: 0.5rem;
+	}
+	&.is-medium {
+		[class^="bb-icon-"] {
+			font-size: 20px;
+			margin-left: 10px;
+		}
+	}
+	&.btn-advance::after
+	{
+		font-family: bb-icons;
+		content: "\e827";
+		margin-left: .1em;
+		font-size: 2.2em;
+		line-height: 0.4;
+		vertical-align: middle;
+	}
+	&.teal {
+		color: white;
+		background-color: $turquoise !important;
+		&:hover, :focus, &:active {
+			background-color: darken($turquoise, 5%) !important;
+			color: white !important;
+		}
+
+	}
+	
+	&.purple {
+		color: white;
+		background-color: $purple2 !important;
+		&:hover, :focus, &:active {
+			background-color: darken($purple2, 5%) !important;
+			color: white !important;
+		}
+
+	}
+	
+	&.is-outline {
+		transition: .3s;
+		background: transparent;
+		border: 2px solid $gold !important;
+		color: $gold;
+
+		&.is-blue {
+			border-color: $link !important;
+			color: $link;
+
+		}
+		&.is-purple {
+			border-color: $purple1 !important;
+			color: $purple1;
+
+		}
+		&:hover, &:focus, &:active {
+			background: $gold;
+			box-shadow: none;
+			color: white;
+			&.is-white {
+				background: white !important;
+				color: $txtcolor;
+			}
+			&.is-blue {
+				background: $link;
+				color: white;
+			}
+			&.is-purple {
+				background: $purple1;
+				color: white;
+			}
+			&.is-grey {
+				background: $grey-light;
+				color: white;
+			}
+		}
+		&.is-white {
+			border-color: white !important;
+			color: white;
+		}
+		&.is-grey {
+			border-color: $grey-light !important;
+			color: $grey-light;
+		}
+	}
+	&.is-full {
+		width: 100%;
+	}
+	&.disabled {
+		background: $white-ter !important;
+		color: $grey-light !important;
+		box-shadow: none !important;
+		
+	}
+	&.is-empty {
+		border: none;
+		background: transparent;
+		&.is-white {
+			color: white;
+			&:active, &:hover, &:focus {
+				color: white;
+				background: transparent;
+			}
+		}
+	}
+
+
+}

@@ -1,0 +1,28 @@
+{% set career = post.get_field('career') %}
+<a href="{{career.link}}" >
+	<div class="card mini-career horizontal hoverable" style="overflow:visible">
+		<div class="card-header">
+			<img src="{{career.get_field('icon')}}" alt="Pack de cursos ARKDE {{career.title}}" width="20px">
+			<p class="subtitle is-size-6" style="line-height:1.2"><small>Parte de la CARRERA</small><br><span class="has-text-weight-bold">{{career.title}}</span></p>
+		</div>
+		<div class="career-list-horizontal">
+			{% for c in career.get_field("courses") %}
+				<div class="course-bullet {{c.title == post.title ? 'special' : ''}}" data-balloon-pos="up" data-balloon="{{c.title}}">
+					<img src="{{c.get_field('icon')}}" alt="Curso {{c.title}}" width="38px" height="38px" loading="lazy">
+					<div class="separator right"></div>
+					<div class="separator left"></div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="card-footer">
+			{% set reg_price =  function('get_post_meta',career.wc_product,'_regular_price',true)%}
+			{% set sale_price =  function('get_post_meta',career.wc_product,'_sale_price',true)%}
+			{% if sale_price and sale_price < reg_price %}
+			<span class="tag is-light is-danger is-medium has-text-weight-bold" >
+				{{ (100 - ((sale_price * 100) / reg_price))|round(0, 'ceil')}}% de Dto.
+			</span>
+			{% endif %}
+		</div>
+
+	</div>
+</a>

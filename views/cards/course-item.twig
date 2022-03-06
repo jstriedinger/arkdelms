@@ -1,0 +1,66 @@
+<a title="{{course.title}}" href="{{course.link}}" class="has-card ">
+	<div class="card course hoverable {{classes}}"  data-ribbon="many line content here " style="--d:15px;--c:pink;--f:20px">
+		<div class="card-header">
+			<img src="{{course.thumbnail.src('medium-big')}}" alt="{{course.title}} curso videojuegos y arte digital en arkde" loading="lazy">
+		</div>
+		<div class="card-content">
+		    <div class="tags" style="margin-bottom:0px">
+		    	<span class="tag is-light" >
+		            {% if course.delivery_type != "bootcamp" %}
+		                Curso Online
+		            {% else %}
+		                Bootcamp
+		            {% endif %}
+		        </span>
+				{% if course.get_field("info").new_course %}
+				<span class="tag is-new-course has-text-weight-bold is-uppercase">
+					nuevo
+				</span>
+				{% endif %}
+				{% set reg_price =  function('get_post_meta',course.wc_product,'_regular_price',true)%}
+				{% set sale_price =  function('get_post_meta',course.wc_product,'_sale_price',true)%}
+				{% if sale_price and sale_price < reg_price %}
+				<span class="tag is-light is-danger has-text-weight-bold" >
+					{{ (100 - ((sale_price * 100) / reg_price))|round(0, 'ceil')}}% Dto.
+				</span>
+				{% endif %}
+		        
+		    </div>
+			<p class="subtitle is-size-5 has-text-weight-bold">{{course.title}}</p>
+			<ul>
+		        {% if course.delivery_type != "bootcamp" %}
+
+		            <li>
+		            {% if course.delivery_type == "selfpaced_bootcamp" %}
+		               <i class="fas fa-users"></i>Solo o con mentorías
+		            {% elseif course.delivery_type == "selfpaced" %}
+		                <i class="fas fa-user"></i>Solo a tu ritmo
+		            {% endif %}
+		            </li>
+		            {% if course.get_field("duration").hours %}
+		            <li>
+		                <i class="bb-icons bb-icon-video"></i>{{ course.get_field("duration").hours ~'h' ~ course.get_field("duration").mins ~'m'}}
+		            </li>
+		            {% endif %}
+		        {% else %}
+		            <li>
+		            	{% set next_date = course.get_field("bootcamp").next_start_date %}
+		                <i class="bb-icons bb-icon-calendar"></i>{{ next_date ? 'Empieza el ' ~ next_date|date("j") ~ " de " ~ next_date|date("F") : 'Próximamente'}}
+		            	
+		            </li>
+		            <li>
+		                <i class="bb-icons bb-icon-clock"></i>{{ course.get_field("bootcamp").weeks}} Semanas
+		            </li>
+		        {% endif %}
+		    </ul>
+		    <div class="bb-course-category">
+		    {% for cat in course_cats %} 
+		        {% if cat.slug != "programacion" and cat.slug != "arte-3d" %}
+		        <span class="logos {{cat.slug}}"></span>
+		        {% endif %}
+		    {% endfor %}
+		        
+		    </div>
+		</div>
+	</div>
+</a>

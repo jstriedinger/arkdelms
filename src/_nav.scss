@@ -1,0 +1,61 @@
+nav#site-navigation {
+	
+	
+	
+}
+
+.site-header {
+	background-color: $navcolor !important;
+	padding:0;
+	.bb-mobile-panel-inner .sub-menu.bb-open {
+		padding-left: 15px;
+	}
+	.sub-menu
+	{
+		@include desktop {
+			min-width: 250px;
+		}
+		a {
+			color: $grey;
+			@include mobile {
+				white-space: normal;
+				line-height: 1.5;
+			}
+			&:hover, &:focus, &:active {
+				color: darken($txtcolor, 5%) !important;
+			}
+		}
+	}
+	ul.primary-menu {
+		> li {
+			&:after {
+				color: white !important;
+			}
+			> a {
+				color: white !important;
+			}
+		}
+	}
+	:not(.sub-menu) a > i, :not(.sub-menu) a > span > i  {
+		color: white !important;
+	}
+	li.menu-item.current-menu-item {
+		a {
+			color: inherit;
+			font-weight: 700;
+		}
+	}
+}
+.header-aside-inner
+{
+	> .user-wrap {
+		> a {
+			color: white !important;
+			i {
+				color: white !important;
+			}
+		}
+	}
+	
+
+}

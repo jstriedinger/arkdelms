@@ -1,0 +1,34 @@
+{% set career = post.get_field("career") %}
+<section class="section full-width with-bg black has-medium-margin-top">
+	<img src="{{career.thumbnail.src}}" alt="{{post.title}}"
+             class="banner-img wp-post-image" loading="lazy" />
+  <div class="container">
+    <div class="columns is-vcentered is-variable-in-desktop is-10">
+    	<div class="column is-half">
+    		<p class="title is-size-4 is-size-3-widescreen title-color">Te recomendamos completar todos los cursos de la Carrera</p>
+    		<p>Este y {{career_courses|length - 1}} cursos más!</p>
+    	</div>
+    	<div class="column is-half is-two-fifths-fullhd">
+    		<div class="card career vertical">
+    			<div class="card-header moving-gradient">
+    				<img src="{{career.get_field('icon')}}" alt="Pack de cursos ARKDE {{career.title}}" width="50px">
+    				<p class="subtitle is-size-5 is-size-4-fullhd" style="line-height:1.2"><small>CARRERA</small><br><span class="has-text-weight-bold">{{career.title}}</span></p>
+    			</div>
+    			<div class="card-content">
+    				{% for c in career.get_field("courses") %}
+    					<div class="course-bullet">
+    						<img src="{{c.get_field('icon')}}" alt="Curso {{c.title}}" width="38px" height="38px" loading="lazy">
+    						<p>{{c.title}}</p>
+    						<div class="separator"></div>
+    					</div>
+    				{% endfor %}
+    			</div>
+    			<div class="card-footer">
+    				<a href="{{career.link}}" class="button is-outline is-fullwidth has-text-weight-bold is-medium">Conoce la Carrera</a>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    
+  </div>
+</section>

@@ -1,0 +1,37 @@
+/*
+Theme Name: 	Arkde LMS 
+Theme URI: 		https://www.arkde.co/
+Description: 	Powered by Buddy Boss.
+Author: 		Jose Striedinger
+License: 		GNU General Public License v3 or later
+License URI: 	http://www.gnu.org/licenses/gpl-3.0.html
+Template: 		buddyboss-theme
+Version: 		1.0.0
+*/
+
+/*
+
+-- Stylesheet locations --
+
+Add your own customizations into /css/custom.css in this child theme.
+
+Parent styles are called from /buddyboss-theme/inc/theme/functions.php in the 
+parent theme and are located in /buddyboss-theme/assets/css/ in the parent theme.
+
+
+--- If you are editing CSS via the WordPress admin, do the following ---
+
+1. Install the plugin WP Editor: http://wordpress.org/plugins/wp-editor/
+2. Navigate to Appearance > Theme Editor in the WordPress admin.
+3. Navigate into the /css/ folder of your child theme to edit custom.css.
+
+*/
+.login.bb-login #login h1{
+		padding: 1rem;
+		border-radius: 5px;
+		background: linear-gradient(to right bottom, #6a11cb, #4A00E0 );
+		
+}
+.login.bb-login #login h1 a {
+	margin:  0 auto !important;
+}

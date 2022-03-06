@@ -1,0 +1,13 @@
+{% set testimonials =  post.get_field("testimonials") %}
+{% if testimonials %}
+<div class="columns is-multiline is-centered has-small-padding-top">
+	<div class="column is-full">
+		<h2 class="subtitle is-size-4 is-size-3-widescreen title-color has-text-weight-bold">Más testimonios</h2>
+	</div>
+	{% for item in testimonials %}
+		<div class="column is-full">
+			{% include "snippets/testimonial-course.twig" with {testimonial : item } %}
+		</div>
+	{% endfor %}
+</div>
+{% endif %}

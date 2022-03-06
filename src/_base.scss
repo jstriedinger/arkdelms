@@ -1,0 +1,227 @@
+body {
+	color: $txtcolor;
+	.ld-expandable{
+		.ld-item-name {
+			padding-left: 10px;
+		}
+	}
+	&.register {
+		h1 {
+			font-family:$family-secondary;
+		}
+	}
+
+	
+	.site-header-container {
+		@include desktop {
+			padding: 0 20px;
+		}
+	}
+	&.buddypress.register .register-section-logo
+	{
+		padding: 1rem;
+		border-radius: 5px;
+		background: linear-gradient(to right bottom, $purple1, $purple2 );	
+	}
+	&.bb-sfwd-aside
+	{
+		.site-header .container
+		{
+			max-width: 1500px;
+			margin: 0 auto;
+		}
+		#content .container {
+			@include widescreen {
+				max-width: 1500px;
+			}
+		}
+	}
+
+	&.login-action-login
+	{
+		#login 
+		{
+			
+		}
+	}
+	&.buddypress.activation.login-split-page {
+		@include desktop {
+			#primary
+			{
+				position: absolute;
+			    left: 50%;
+			    top: 50%;
+			    padding: 30px 0 30px 50px;
+			    -webkit-transform: translateY(-50%);
+			    -ms-transform: translateY(-50%);
+			    transform: translateY(-50%);
+
+			}
+			.site#page {
+				height: 100%;
+			}
+		}
+	}
+	&.page-template-mentorships {
+
+		:not(header) >, :not(.price-item) > {
+			h1,h2,h3,h4,h5,h6,p,a {
+				color: white;
+			}
+			
+		}
+		
+	}
+	&.single-career, &.page-template-mentorships, &.home-page, &.page-template-aboutus, &.page-template-scholarship {
+		background: $careerbg;
+
+		.course-content, .content{
+			color: white;
+			h1,h2,h3,h4,h5,h6, strong { color: white; }
+			&:before {
+				background: linear-gradient(to bottom, transparent 50%, $careerbg);
+			}
+		}
+		.section > .subtitle { color: white; }
+
+		.bb-learndash-banner{
+			&:before {
+				background: linear-gradient(to bottom, rgba($navcolor,0.5) 65% , $careerbg );
+				opacity: 1;
+			} 
+		}
+		.bb-learndash-content-wrap, .learndash-wrapper
+		{
+
+			> p,> h1,> h2,> h3,> h4,> h5,> h6, a:not(.has-card) {
+				color: white
+			}
+		}
+		.card.bullets {
+			color: white;
+		}
+		.bb-course-banner-info
+		{
+			@include desktop {
+				padding-top: 80px;
+				padding-bottom: 180px;
+			}
+			h1+p {
+				@include desktop {
+					font-size: 18px;
+				}
+				@include widescreen {
+					font-size: 20px;
+				}
+			}
+			img.partner {
+				padding-top: 0.5rem;
+				max-width: 100px;
+				@include widescreen {
+					max-width: 120px;
+				}
+			}
+		}
+		.card.course {
+			border: none;
+			&.mini {
+				background: $careerbg;
+			}
+		}
+		.learndash-wrapper .ld-item-list {
+			
+			.ld-expandable.purple{
+				.ld-item-list-item-preview {
+					background: $navcolor;
+					flex-direction: row !important;
+					align-items: center !important;
+					border: none;
+					.ld-item-details {
+						margin-left: 0;
+					}
+				}
+				.ld-icon-arrow-down.ld-icon, .ld-item-name {
+					color: white !important;
+				}
+				
+				.ld-item-list-item-expanded:before {
+					background: $navcolor !important;
+				}
+				.ld-item-list-item-expanded {
+					p,a { color: whitesmoke;}
+				}
+				
+			}
+		}
+		.learndash-wrapper .ld-item-list.double-items {
+			.ld-item-list-items {
+				@include desktop {
+					display: flex;
+					flex-wrap: wrap;
+					.ld-item-list-item {
+						margin: 1em;
+						flex-basis: calc(50% - 2em);
+						&.full {
+							flex: 1;
+
+						}
+					}
+				}
+			}
+		}
+		.card.bullets {
+			background: $navcolor;
+			border: none;
+			li {
+    			[class^="bb-icon-"], [class*=" bb-icon-"] {
+    				color: $turquoise;
+    			}
+    			color: white;
+    		}
+    		p,h1,h2,h3,h4,h5,h6 {
+    			color: white;
+    		}
+		}
+	}
+	&.page-template-mentorships {
+		ul  li { color: white; }
+	}
+	&.home-page, &.page-template-aboutus {
+		.column {
+			p,> h1,> h2,> h3,> h4,> h5,> h6, a:not(.has-card) {
+				color: white
+			}
+		}
+	}
+	&.bb-dark-theme
+	{
+		span.ld-topic-title
+		{
+			color: white !important;
+			&:before {
+				color: white !important;
+			}
+		}
+	}
+}
+ul {
+	&.simple {
+		list-style: none;
+		margin: 0;
+		li {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			font-size: 14px;
+			line-height: 1.5;
+			&:not(:last-child)
+			{
+				margin-bottom: 14px;
+			}
+			[class^="bb-icon-"] {
+				margin-right: 5px;
+			}
+		}
+		margin-bottom: 1.2em;
+	}
+}

@@ -1,0 +1,203 @@
+{% set info = post.meta("info") %}
+
+<div id="primary" class="content-area bb-grid-cell career is-paddingless-top">
+	<div id="main" class="site-main">
+		<div class="bb-vw-container bb-learndash-banner">
+	 		<img src="{{post.thumbnail.src}}" alt="{{post.title}}" class="banner-img wp-post-image"/>
+		    <div class="bb-course-banner-info container bb-learndash-side-area">
+		        <div class="flex flex-wrap">
+		            <div class="bb-course-banner-inner">
+		            	<div class="career-icon">
+		            		<img src="{{post.get_field('icon')}}" alt="Carrera arkde" width="70px" >
+		            		<span>Carrera</span>
+		            	</div>
+		            	<h1 class="title is-size-2 is-size-1-widescreen is-large is-marginless">{{post.title}}</h1>
+		            	<p class="">{{post.get_field("info").subtitle}}</p>
+		                <br>
+		                <br>
+		                <p class="is-marginless">Creado con:</p>
+		                <img src="{{post.get_field('partner').url}}" alt="{{post.get_field('partner').title}}" class="partner" loading="lazy">
+		            </div>
+		        </div>
+		    </div>
+
+		</div>
+		<div class="bb-grid" id="datalayer_course" data-name="{{post.title}}" data-id="{{wc_product_id}}" data-price="{{wc_price}}" data-category="Carrera">
+			<div class="bb-learndash-content-wrap has-big-margin-bottom">
+				<div class="card bullets last">
+					<h2 class="subtitle is-size-5  has-text-weight-bold">¿Qué vas a aprender?</h2>
+					<ul>
+						{% for req in info.objectives %}
+						<li>
+							<i class="bb-icon-check colored teal"></i>{{req.item}}
+						</li>
+						{% endfor %}
+						
+					</ul>
+					<br>
+					<h2 class="subtitle is-size-5 has-text-weight-bold has-small-padding-top">Los cursos de la carrera:</h2>
+					<div class="columns is-multiline">
+							{% for course in post.get_field("courses") %}
+							<div class="column is-half">
+								{% include "cards/mini-course-item.twig" %}
+							</div>
+							{% endfor %}
+					</div>
+				</div>
+				<div class="course-content content">
+	              {{post.content}}
+	            </div>
+	            <div class="show-more">
+	              <a href="#" class="colored green has-text-weight-bold">Mostrar más <i class="bb-icon-chevron-down bb-icons is-large" style="vertical-align:bottom"></i></a>
+	            </div>
+				
+				{% set teachers = post.get_field("teachers") %}
+				<h2 class="has-huge-margin-top subtitle is-size-4 is-size-3-widescreen has-text-weight-bold">
+    				{{ teachers|length > 1 ? "Conoce a tus instructores" : "Conoce a tu instructor"}}
+    			</h2>
+				<section>
+					<div class="columns is-multiline">
+						{% for teacher in teachers %}
+							<div class="column is-full is-half-fullhd">
+								{% include "cards/teacher.twig" with {"class":"colored"} %}
+							</div>
+						{% endfor %}
+					</div>
+				</section>
+				{% if post.testimonials %}
+					<h2 class="has-huge-margin-top subtitle is-size-4 is-size-3-widescreen has-text-weight-bold">Testimonios</h2>
+				<div class="columns is-multiline has-small-margin-top">
+					{% for item in post.get_field("testimonials") %}
+						<div class="column is-full">
+							{% include "snippets/testimonial-course.twig" with {testimonial : item, class : "white" } %}
+						</div>
+					{% endfor %}
+					
+				</div>
+				{% endif %}
+				{% if post.faq %}
+					{% include "snippets/faq_career.twig" %}
+				{% endif %}
+			</div>
+			<div class="bb-single-course-sidebar bb-preview-wrap">
+			    <div class="bb-ld-sticky-sidebar">
+			        <div class="widget bb-enroll-widget">
+			            <div class="bb-enroll-widget flex-1 push-right">
+			                <div class="bb-course-preview-wrap bb-thumbnail-preview">
+			                    <div class="bb-preview-course-link-wrap">
+			                        <div class="thumbnail-container {{thumb_mode}}">
+										<div class="bb-course-video-overlay">
+											<div>
+												<span class="bb-course-play-btn-wrapper"><span
+															class="bb-course-play-btn"></span></span>
+												<div>Mira el trailer</div>
+											</div>
+										</div>
+			                            {{function("the_post_thumbnail")}}
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+
+			            <div class="bb-course-preview-content">
+			                <div class="bb-button-wrap">
+			                    <div class="price" data-price="{{wc_price}}" data-regular="{{wc_regular_price}}">
+									<p class="is-marginless">Antes: <span class="before">${{wc_regular_price|number_format(0,',','.')}}</span></p>  
+									<div class="with-dt-label">
+										<p class="current"><span>${{wc_price|number_format(0,',','.')}}</span><small class="currency"> {{currency}}</small></p>
+										<span class="tag is-danger is-light has-text-weight-bold">{{discount}}% dto.</span>
+									</div>     
+			                    </div>
+			               	{% if ( is_enrolled == false ) %}
+
+			               		{# if post.has_mentorships %}
+			               			{% if in_cart and mentorship_in_cart %}
+				                    <a href="{{site.link}}/checkout/" class="button teal is-fullwidth is-medium">Compralo Ahora <i class="bb-icons bb-icon-shopping-cart"></i></a>
+				                    {% else %}
+				                    <a href="" class="modal-opener button teal is-fullwidth is-medium" data-modal="mentorships-career-modal">Compralo Ahora <i class="bb-icons bb-icon-shopping-cart"></i></a>
+
+				                    {% endif %}
+			               		{% else #}
+			               			{% if in_cart %}
+			               				<a href="{{site.link}}/cart/" class="button teal is-fullwidth is-medium">Ver Carrito <i class="bb-icons bb-icon-shopping-cart"></i></a>
+			               			{% else %}
+			               				{{function('do_shortcode','[add_to_cart id="' ~ wc_product_id ~ '" style="" show_price="FALSE" class="from-learndash-banner is-marginless"]')}}
+			               			{% endif %}
+			               		{# endif #}
+			                {% else %}
+			                    <a href="{{mycourses_link}}" class="button is-outline is-grey is-full is-small ">Sigue la carrera <i class="bb-icons bb-icon-arrow-right"></i></a>
+			                {% endif %}
+			            	</div>
+
+		            		<div class="bb-course-volume">
+		                    <ul class="bb-course-volume-list">
+		                    	<li>
+		                            <i class="fas fa-infinity" style="font-size: 15px"></i> Acceso de por vida al contenido
+		                        </li>
+		                        <li>
+		                            <i class="bb-icons bb-icon-book"></i>{{post.get_field("courses")|length }} Cursos en total
+		                        </li>
+								{% if topics_count > 0 %}
+								<li>
+									<i class="bb-icons bb-icon-bookmark"></i>{{topics_count}} lecciones
+								</li>
+								{% endif %}
+	                            <li>
+                                	<i class="bb-icons bb-icon-play-circle"></i>{{duration}} de video
+                            	</li>
+								 {% if post.get_field("info").resources > 0 %}
+								<li>
+									<i class="bb-icons bb-icon-generic"></i> {{post.get_field("info").resources}}+ recursos descargables
+								</li>
+								{% endif %}
+		                      
+		                        {% if students_total > 1 %}
+		                            <li>
+		                                <i class="bb-icons bb-icon-members"></i>{{students_total}}+ Estudiantes
+		                            </li>
+		                        {% endif %}
+		                        	<li>
+		                                <i class="bb-icons bb-icon-tools"></i><div class="bb-course-category">
+		                                {% for cat in post.terms("tool") %} 
+		                                    {% if cat.slug != "programacion" and cat.slug != "arte-3d" %}
+		                                    <span class="logos is-medium {{cat.slug}}" data-balloon-pos="up" data-balloon="{{cat.name}}"></span>
+		                                    {% endif %}
+		                                {% endfor %}
+		                                    
+		                                </div>
+		                            </li>
+		                        
+		                    </ul>
+		                    {# if post.has_mentorships %}
+		                        <ul class="bb-course-volume-list">
+		                            <li>
+		                                <i class="bb-icons bb-icon-video"></i> {{post.get_field("mentorship").weeks}} semanas de mentorías EN VIVO
+		                            </li>
+		                            <li>
+		                                <i class="fab fa-discord" style="font-size: 15px"></i>Chat privado en Discord
+		                            </li>
+		                            <li>
+		                                <i class="bb-icons bb-icon-badge"></i>Certificado Oficial al terminar
+		                            </li>
+		                        </ul>
+		                    {% endif #}
+		                    </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="bb-modal bb_course_video_details mfp-hide">
+				{% if course_video_embed %}
+					{% if video_html_embed %}
+						{{video_html_embed}}
+					{% else %}
+						<video width="100%" controls>
+							<source src="{{course_video_embed}}" type="video/mp4">
+							Tu navegador no soporta Videos HTML5
+						</video>
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

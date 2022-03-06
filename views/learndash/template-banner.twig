@@ -1,0 +1,63 @@
+{# Template-banner for top section of a course page.
+	TWIG formatted template-banner from Buddyboss theme
+ #}
+ <div class="bb-vw-container bb-learndash-banner">
+ 	<img src="{{course_cover_photo}}" alt="{{post.title}}"
+             class="banner-img wp-post-image ken-burn"/>
+        
+    <div class="bb-course-banner-info container bb-learndash-side-area has-medium-padding-top has-medium-padding-bottom">
+        <div class="flex flex-wrap">
+            <div class="bb-course-banner-inner">
+                <div class="level simple is-mobile">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <div class="tags">
+                                <span class="tag is-light is-uppercase">
+                                        {% if post.delivery_type != "bootcamp" %}
+                                            curso online
+                                        {% else %}
+                                            bootcamp
+                                        {% endif %}
+                                    </span>
+                                {% if post.get_field("info").new_course %}
+                                <span class="tag is-new-course is-uppercase hast-text-weigth-bold">
+                                    nuevo
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        {% if post.visible_reviews or is_enrolled %}
+                        <div class="level-item">
+                            <span class="ratings-here">{{post.title}}</span>
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+                <h1 class="title is-size-2 is-size-1-fullhd is-large is-marginless">{{post.title}}</h1>
+                <br>
+				 {% set teachers = post.get_field("teachers") %}
+                
+                    <div class="level has-tiny-padding-bottom">
+                        <div class="level-left">
+                            {% for teacher in teachers %}
+                            <div class="level-item">
+                                <div class="teacher-item small">
+                                    <img src="{{ teacher.thumbnail.src('thumbnail') }}" alt="{{teacher.title}} profesor Arkde" width="60px" height="60px">
+                                    <div class="content">
+                                        <p class="is-marginless has-text-weight-bold"> {{teacher.title}}</p>
+                                        <p class="is-marginless  is-size-7">{{teacher.subtitle_extra}}</p>
+                                    </div>
+                                </div>
+                            </div>  
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+               
+                
+            </div>
+        </div>
+    </div>
+
+</div>

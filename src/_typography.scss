@@ -1,0 +1,178 @@
+@import "~bulma/sass/helpers/typography";
+
+//Typography
+h1,h2,h3 {
+	font-family: $family-primary;
+}
+h4,h5,h6 {
+	font-family: $family-secondary;
+}
+p {
+	line-height: 1.5;
+	&.is-grey {
+		color: $grey-light !important;
+	}
+	&.has-text-danger {
+		color: $danger !important;
+	}
+}
+h1,h2,h3,h4,h5,p,span:not(.tag),small {
+
+	&.title {
+		font-family: 'Harmonia Sans';
+		font-weight: 700;
+		line-height: 1.3;
+	}
+	&.subtitle {
+		font-family: 'Open Sans';
+	}
+	&.title-color {
+		color: $title-color;
+	}
+
+	&.with-subtitle {
+		margin-bottom: 5px !important;
+		+ {
+			h2,h3,h4,h5,h6{
+				margin-bottom: 0;
+			}
+		}
+	}
+	
+	&.is-primary{
+		font-family: Harmonia Sans,"Open Sans",  Sans-Serif;
+		font-weight: 700;
+	}
+	&.is-secondary {
+		font-family: "Open Sans";
+		font-weight: 700;
+	}
+	&.is-purple2{
+		color: $purple2 !important;
+	}
+	&.is-purple1{
+		color: $purple1 !important;
+	}
+	&.is-gold {
+		color: $gold !important;
+	}
+	
+	&.uppercase {
+		text-transform: uppercase
+	}
+	&.normal {
+		text-transform: none !important;
+	}
+	&.is-large {
+		@include desktop {
+			font-size: 52px !important;
+		}
+		@include widescreen {
+			font-size: 60px !important;
+		}
+		@include fullhd {
+			font-size: 65px !important;
+		}
+	}
+	&.is-big {
+		@include desktop {
+			font-size: 40px;
+		}
+		@include widescreen {
+			font-size: 50px;
+		}
+		
+		line-height: 1.25;
+	}
+	&.is-medium {
+		@include desktop {
+			font-size: 34px;
+		}
+		@include widescreen {
+			font-size: 40px;
+		}
+		
+		line-height: 1;
+	}
+
+	&.has-text-weight-black {
+		font-weight: 900;
+	}
+}
+h1,h2,h3 {
+	line-height: 1.3;
+}
+h4,h5,h6 {
+	line-height: 1.4;
+}
+
+//Anchor links
+a{
+	&.hoverable {
+    	will-change: top, transform;
+    	transition: top 0.2s ease-out, transform 0.2s ease-out,box-shadow 0.2s ease-in-out;
+    	top: 0;
+    	&:hover, &:focus {
+    		top: -7px;
+    	}
+    }
+	&.colored {
+		&.green {
+			color: $turquoise !important;
+			[class^="bb-icon-"], [class*=" bb-icon-"] {color: $turquoise;} 
+			&:hover, &:active, &:focus {
+				color: $turquoise !important;
+			}
+		}
+		&.blue {
+			color: $link !important;
+			[class^="bb-icon-"], [class*=" bb-icon-"] {color: $link;} 
+			&:hover, &:active, &:focus {
+				color: $link !important;
+			}
+		}
+		&.purple {
+			color: $purple1 !important;
+			[class^="bb-icon-"], [class*=" bb-icon-"] {color: $purple1;} 
+			&:hover, &:active, &:focus {
+				color: $purple1 !important;
+			}
+		}
+		&.white {
+			color: whitesmoke !important;
+			[class^="bb-icon-"], [class*=" bb-icon-"] {color: whitesmoke;} 
+			&:hover, &:active, &:focus {
+				color: whitesmoke !important;
+			}
+		}
+	}
+	&.underline {
+		text-decoration: underline !important;
+	}
+	//Rounded social links in homepage and other parts with tooltips
+	&.social {
+		border-radius: 100%;
+		background-color: $turquoise;
+		width: 65px;
+		height: 65px;
+		position: relative;
+		text-align: center;
+		padding-top: 15.5px;
+		span.count {
+			position: absolute;
+			top:-11px;
+			right: -12px;
+			border-radius: 100%;
+			background: $navcolor;
+			font-size: 10px;
+			padding: 0;
+			letter-spacing: normal;
+			width: 26px;
+			height: 26px;
+			padding-top: 7px;
+			line-height: 1;
+
+
+		}
+	}
+}

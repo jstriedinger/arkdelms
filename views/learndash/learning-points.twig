@@ -1,0 +1,60 @@
+{% if post.get_field("info").what_to_learn %}
+<div class="card bullets {{(post.delivery_type == "selfpaced") ? 'last' : (post.delivery_type == "selfpaced_bootcamp" and post.get_field("bootcamp").mentorships_open_sale == false) ? 'last' : '' }}">
+	<h2 class="subtitle is-size-5 title-color has-text-weight-bold">¿Qué vas a aprender?</h2>
+	<ul>
+		{% for req in post.get_field("info").what_to_learn %}
+		<li>
+			<i class="bb-icon-check has-text-weight-bold colored teal"></i>{{req.txt}}
+		</li>
+		{% endfor %}
+		
+	</ul>
+	{% if post.get_field("delivery_type") ==  "bootcamp" %}
+	
+	{% endif %}
+</div>
+{% endif %}
+{% if post.delivery_type == "selfpaced_bootcamp" and post.get_field("bootcamp").mentorships_open_sale %}
+<div class="card bullets last">
+	<h3 class="subtitle is-size-5 title-color has-text-weight-bold">Aprende a tu manera</h3>
+	<ul>
+		<li>
+			<i class="far fa-frown fa-2x"></i>
+			<div style="margin: 0 10px;">
+				<span class="has-text-weight-bold is-size-6">Solo</span><br>
+				<small>Solo acceso de por vida a los videos.</small>
+			</div>
+		</li>
+		<li>
+			<i class="far fa-smile fa-2x"></i>
+			<div style="margin: 0 10px;">
+			<span class="has-text-weight-bold is-size-6">Con mentorías en vivo</span><br><small>Acceso de por vida a los videos y a {{post.get_field("bootcamp").weeks}} semanas de mentorías online en vivo con profesionales de la industria.</small>
+			</div>
+		</li>
+	</ul>
+</div>
+{% elseif post.delivery_type == "bootcamp" %}
+<div class="card bullets last">
+	<h3 class="subtitle is-size-5  title-color has-text-weight-bold">¿Cómo funciona un bootcamp?</h3>
+	<div class="columns is-multiline connected-bullets has-text-centered">
+		<div class="column">
+			<div class="holder">
+			<i class="bb-icon-play"></i>
+			</div>
+			<p class="is-size-7">Aprende con acceso de por vida a los videos pre-grabados del curso.</p>
+		</div>
+		<div class="column">
+			<div class="holder">
+			<i class="bb-icon-groups"></i>
+			</div>
+			<p class="is-size-7">Mentorías en vivo para resolver dudas y recibir retroalimentación de tu trabajo.</p>
+		</div>
+		<div class="column">
+			<div class="holder">
+			<i class="bb-icon-badge"></i>
+			</div>
+			<p class="is-size-7">Termina tu proyecto final y recibe un Certificado Oficial del curso</p>
+		</div>
+	</div>
+</div>
+{% endif %}

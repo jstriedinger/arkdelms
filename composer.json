@@ -1,0 +1,13 @@
+{
+    "name": "buddyboss/arkde",
+    "description": "ARKDE child theme from buddyboss theme",
+    "authors": [
+        {
+            "name": "Jose Striedinger",
+            "email": "jstriedinger2090@gmail.com"
+        }
+    ],
+    "require": {
+        "timber/timber": "^1.18"
+    }
+}

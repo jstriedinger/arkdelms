@@ -1,0 +1,97 @@
+<div id="primary" class="content-area bb-grid-cell is-paddingless-bottom">
+<section class="section has-medium-padding-top" id="scholarship">
+    <img src="{{post.thumbnail.src}}" alt="{{post.title}}"
+            class="banner-img wp-post-image"/>
+    {% if post.vimeo_id  %}
+    <iframe id="videobg" data-src="https://player.vimeo.com/video/{{post.vimeo_id}}?background=1&autoplay=1&loop=1&byline=0&title=0"  data-img="{{post.thumbnail.src}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+    {% endif %}
+    <div class="container has-medium-padding-top">
+        <div class="columns is-centered is-multiline has-text-centered">
+            <div class="column is-four-fifths ">
+                <span class="tag is-medium is-light" style="margin-bottom: 10px">Convocatoria de Becas</span>
+                <h1 class="title is-size-2 is-size-1-desktop is-large is-uppercase has-text-weight-black">{{post.header}}</h1>
+                <p class="subtitle is-size-5">{{post.subheader}}</p>
+            </div>
+            <div class="column is-half has-small-padding-top ">
+                <p style="margin-bottom:5px">Patrocinado y auspiciado por:</p>
+                <a href="https://killasoft.com/about/">
+                    <img src="{{post.get_field("sponsor").url}}" alt="{{post.get_field("sponsor").name}} patrocinador becas ARKDE" width="200px">				
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="desc" class="section has-medium-padding-top">
+    <div class="columns has-small-padding-top is-variable-in-desktop is-8">
+        <div class="column content">
+            <h2 class="subtitle is-size-3">{{post.content_header}}</h2>
+            <div class="level is-mobile">
+                <div class="level-left">
+                    <div class="level-item">
+                        <div class="bb-icon-calendar is-huge"></div>
+                    </div>
+                    <div class="level-item">
+                        <p><small>Aplica antes del:</small><br>{{post.end_date|date("j") ~ " de " ~ post.end_date|date("F")}}</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+             {{post.content}}
+             <div class="is-hidden-desktop">
+             {% if available %}
+                <a href="{{post.form_link}}" title="Formulario de inscripcion beca arkde" class="button is-full teal is-medium">Inscribete aquí</a>
+                {% else %}
+                <span class="tag is-warning is-medium is-full"><span class="bb-icons bb-icon-alert-triangle" style="margin-right:5px;"></span>Cerrado</span>
+                {% endif %}
+             </div>
+             <br>
+             <div class="card bullets">
+                <h4 class="subtitle is-size-5 title-color has-text-weight-bold">¿Qué vas a aprender?</h4>
+                <ul>
+                    {% for req in post.get_field("learning_points") %}
+                        <li>
+                            <i class="bb-icon-check has-text-weight-bold colored teal"></i>{{req.point}}
+                        </li>
+                    {% endfor %}
+                </ul>
+             </div>
+            {% if post.get_field("featured_item").post_type == "career"%}
+                {% include "cards/career.twig" with {'career':post.get_field("featured_item"),'hide_price': true } %}
+            {% else %}
+                {% include "cards/course-item.twig" with {'course':post.get_field("featured_item")} %}
+            {% endif %}
+            <br>
+            {% include "snippets/faq_career.twig" %}       
+            
+        </div>
+        <div class="column is-one-third is-hidden-touch bb-single-course-sidebar ">
+            <div class="box bb-course-preview-content" id="sticky_sidebar">
+                {% if available %}
+                <a href="{{post.form_link}}" title="Formulario de inscripcion beca arkde" class="button is-full teal is-medium">Inscribete aquí</a>
+                {% else %}
+                <span class="tag is-warning is-medium is-full"><span class="bb-icons bb-icon-alert-triangle" style="margin-right:5px;"></span>Cerrado</span>
+                {% endif %}
+                <div class="bb-course-volume has-small-padding-top">
+                    <ul class="bb-course-volume-list" style="padding-bottom:5px;">
+                        <li>
+                            <i class="bb-icons bb-icon-calendar"></i>Aplica hasta el {{post.end_date|date("j") ~ " de " ~ post.end_date|date("F")}}
+                        </li>
+                    {% for item in post.get_field("sidebar") %}
+                        <li>
+                            <i class="awesome {{item.icon}}"></i>{{item.txt}}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    <br>
+                    <small style="margin-bottom:5px"> Patrocinado y auspiciado por:</small>
+                    <a href="https://killasoft.com/about/">
+                        <img src="{{post.get_field("sponsor").url}}" alt="{{post.get_field("sponsor").name}} patrocinador becas ARKDE" width="150px">				
+                    </a>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+</section>
+</div>
