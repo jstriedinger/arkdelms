@@ -1,6 +1,5 @@
 node_modules/
 vendor/
-dist/
 # ignore all files starting with . or ~
 .*
 ~*
