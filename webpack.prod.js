@@ -1,10 +1,9 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
-const glob = require('glob-all');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
-const PurifyCSSPlugin = require("purifycss-webpack");
 
 module.exports = merge(common, {
 	mode: 'production',
@@ -35,16 +34,18 @@ module.exports = merge(common, {
 	    ]
 	},
 	optimization: {
-	    minimizer: [new TerserPlugin({ cache: true, parallel: true, terserOptions: { output: {comments: false} } })]
-	  },
-	plugins: [
+	    minimizer: [new TerserPlugin({ cache: true, parallel: true, terserOptions: { output: {comments: false} } }),
+			new CssMinimizerPlugin(),]
+	  }
+	  
+	/*plugins: [
 		new OptimizeCssAssetsPlugin({
-	      assetNameRegExp: /\.css$/g,
-	      cssProcessor: require('cssnano'),
-	      cssProcessorPluginOptions: {
-	        preset: ['default', { discardComments: { removeAll: true } }],
-	      },
-	      canPrint: true
-	    })    
-	]
+			assetNameRegExp: /\.css$/g,
+			cssProcessor: require('cssnano'),
+			cssProcessorPluginOptions: {
+			  preset: ['default', { discardComments: { removeAll: true } }],
+			},
+			canPrint: true
+		  })
+	]*/
 });

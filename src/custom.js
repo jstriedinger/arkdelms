@@ -5,7 +5,7 @@ import { gsap, ScrollTrigger, ScrollToPlugin } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); 
 
-const imgs = require.context('./img', true);
+const imgs = require.context('./img/opt', false);
 
 var firstTry = true;
 
