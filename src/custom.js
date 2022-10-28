@@ -317,41 +317,6 @@ jQuery(document).ready(function(){
             sessionStorage.setItem("next_event_modal", "true");
         }, 3000);
      }
-   
-    /**
-     * Get the rates frm Open Exchange Rate API.
-     * NOT USED ANYMORE
-     * @return {[type]} [description]
-     */
-     /*
-    function getRates(){
-        const key = "rates"; // Key to identify our data in sessionStorage
-
-        // Checking the cache's data in SessionStorage
-        let rates = sessionStorage.getItem(key);
-        if(rates){
-            // If there's somethin in the sessionStorage with our key, return that data:
-            console.log("Return cached data");
-            fx.rates = JSON.parse(rates);
-            fx.base = "USD";
-            return;
-        }
-
-        //If there's nothing in the storage, make the AJAX request:
-        $.ajax({
-          url: 'https://openexchangerates.org/api/latest.json?app_id=dc4d804f35df42a5b1589b3cd34bc909',
-          dataType: 'json',
-          async: false,
-          success: function(data) {
-            rates = data.rates;
-                sessionStorage.setItem(key, JSON.stringify(data.rates));
-                fx.rates = rates;
-                fx.base = "USD";
-                return;
-          }
-        });
-        
-    }*/
 
     //Learndash file input handle
     $( '.ld-file-input' ).off("change");
