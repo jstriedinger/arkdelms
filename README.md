@@ -1,5 +1,6 @@
-# arkdelms
-LMS theme for ARKDE based on Buddyboss and Learndash.
+![Arkde logo](https://github.com/jstriedinger/jstriedinger/blob/main/arkde-badge.png?raw=true)
+# ARKDELMS
+Wordpress theme for arkde,com, powered by Buddyboss, Learndash & woocommerce.
 With a lot of customization options made with PHP, Javascripts and SASS mainly.
 
-This will be updated over time with instructions in case I hire another developer at some time (don't think so thou)
+This is the current theme used on the platform.
