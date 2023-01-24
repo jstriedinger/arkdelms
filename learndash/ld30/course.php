@@ -109,8 +109,9 @@ if ( is_array( $lesson_count ) || is_object( $lesson_count ) ) {
 	foreach ( $lesson_count as $lesson ) {
 		$lesson_quizzes    = learndash_get_lesson_quiz_list( $lesson->ID, null, $course_id );
 		$lesson_topics_tmp = learndash_topic_dots( $lesson->ID, false, 'array', null, $course_id );
-		if ( $lesson_quizzes & ! empty( $lesson_quizzes ) ) {
+		if ( $lesson_quizzes && ! empty( $lesson_quizzes ) ) {
 			$course_quizzes_count += count( $lesson_quizzes );
+			
 		}
 		if ( $lesson_topics_tmp && ! empty( $lesson_topics_tmp ) ) {
 			foreach ( $lesson_topics_tmp as $topic ) {
